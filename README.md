@@ -6,9 +6,15 @@
 
 **English** | [简体中文](README-CN.md)
 
+<a href="https://pypi.org/project/autoagents-cua">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/pypi/v/autoagents-cua.svg?style=for-the-badge" />
+    <img alt="PyPI version" src="https://img.shields.io/pypi/v/autoagents-cua.svg?style=for-the-badge" />
+  </picture>
+</a>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="media/dark_license.svg" />
-  <img alt="License AGPL-3.0" src="media/light_license.svg" />
+  <img alt="License MIT" src="media/light_license.svg" />
 </picture>
 
 </div>
