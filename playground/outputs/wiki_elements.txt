@@ -1,0 +1,266 @@
+[1]:<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+[2]:<input id="vector-main-menu-dropdown-checkbox" class="vector-dropdown-checkbox " type="checkbox" role="button" aria-label="Main menu"></input>
+[3]:<a class="mw-logo" href="/wiki/Main_Page"></a>
+[4]:<input id="searchInput" class="cdx-text-input__input mw-searchInput" name="search" type="search" placeholder="Search Wikipedia" title="Search Wikipedia [ctrl-option-f]" aria-label="Search Wikipedia"></input>
+[5]:<button class="cdx-button cdx-search-input__end-button">Search</button>
+[6]:<a href="https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=en.wikipedia.org&use...">Donate</a>
+[7]:<a href="/w/index.php?title=Special:CreateAccount&returnto=Main+Page" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a>
+[8]:<a href="/w/index.php?title=Special:UserLogin&returnto=Main+Page" title="You're encouraged to log in; however, it's not mandatory. [ctrl-option-o]">Log in</a>
+[9]:<input id="vector-user-links-dropdown-checkbox" class="vector-dropdown-checkbox " type="checkbox" role="button" aria-label="Personal tools"></input>
+[10]:<a href="/wiki/Main_Page" title="View the content page [ctrl-option-c]">Main Page</a>
+[11]:<a href="/wiki/Talk:Main_Page" title="Discuss improvements to the content page [ctrl-option-t]">Talk</a>
+[12]:<a href="/wiki/Main_Page">Read</a>
+[13]:<a href="/w/index.php?title=Main_Page&action=edit" title="This page is protected.
+You can view its source [ctrl-option-e]">View source</a>
+[14]:<a href="/w/index.php?title=Main_Page&action=history" title="Past revisions of this page [ctrl-option-h]">View history</a>
+[15]:<input id="vector-page-tools-dropdown-checkbox" class="vector-dropdown-checkbox " type="checkbox" role="button" aria-label="Tools"></input>
+[16]:<button class="vector-pinnable-header-toggle-button vector-pinnab...">hide</button>
+[17]:<input id="skin-client-pref-vector-feature-custom-font-size-value-0" class="cdx-radio__input" name="skin-client-pref-vector-feature-custom-font-size-group" type="radio" value="0"></input>
+[18]:<input id="skin-client-pref-vector-feature-custom-font-size-value-1" class="cdx-radio__input" name="skin-client-pref-vector-feature-custom-font-size-group" type="radio" value="1"></input>
+[19]:<input id="skin-client-pref-vector-feature-custom-font-size-value-2" class="cdx-radio__input" name="skin-client-pref-vector-feature-custom-font-size-group" type="radio" value="2"></input>
+[20]:<input id="skin-client-pref-vector-feature-limited-width-value-1" class="cdx-radio__input" name="skin-client-pref-vector-feature-limited-width-group" type="radio" value="1"></input>
+[21]:<input id="skin-client-pref-vector-feature-limited-width-value-0" class="cdx-radio__input" name="skin-client-pref-vector-feature-limited-width-group" type="radio" value="0"></input>
+[22]:<input id="skin-client-pref-skin-theme-value-os" class="cdx-radio__input" name="skin-client-pref-skin-theme-group" type="radio" value="os"></input>
+[23]:<input id="skin-client-pref-skin-theme-value-day" class="cdx-radio__input" name="skin-client-pref-skin-theme-group" type="radio" value="day"></input>
+[24]:<input id="skin-client-pref-skin-theme-value-night" class="cdx-radio__input" name="skin-client-pref-skin-theme-group" type="radio" value="night"></input>
+[25]:<a href="/wiki/Wikipedia" title="Wikipedia">Wikipedia</a>
+[26]:<a href="/wiki/Free_content" title="Free content">free</a>
+[27]:<a href="/wiki/Encyclopedia" title="Encyclopedia">encyclopedia</a>
+[28]:<a href="/wiki/Help:Introduction_to_Wikipedia" title="Help:Introduction to Wikipedia">anyone can edit</a>
+[29]:<a href="/wiki/Special:Statistics" title="Special:Statistics">112,780</a>
+[30]:<a href="/wiki/Special:Statistics" title="Special:Statistics">7,077,974</a>
+[31]:<a href="/wiki/English_language" title="English language">English</a>
+[32]:<a class="mw-file-description" href="/wiki/File:Manchester_United_Panorama_(8051523746).jpg" title="Old Trafford, venue of the match"></a>
+[33]:<a href="/wiki/Manchester_United_F.C._9%E2%80%930_Ipswich_Town_F.C." title="Manchester United F.C. 9–0 Ipswich Town F.C.">A Manchester United and Ipswich Town football matc</a>
+[34]:<a href="/wiki/Old_Trafford" title="Old Trafford">Old Trafford</a>
+[35]:<a href="/wiki/1994%E2%80%9395_FA_Premier_League" title="1994–95 FA Premier League">1994–95 FA Premier League</a>
+[36]:<a href="/wiki/List_of_highest-scoring_Premier_League_matches" title="List of highest-scoring Premier League matches">largest winning margin in the Premier League</a>
+[37]:<a href="/wiki/Southampton_F.C._0%E2%80%939_Leicester_City_F.C." title="Southampton F.C. 0–9 Leicester City F.C.">in 2019</a>
+[38]:<a href="/wiki/Manchester_United_F.C._9%E2%80%930_Southampton_F.C." title="Manchester United F.C. 9–0 Southampton F.C.">in 2021</a>
+[39]:<a href="/wiki/Liverpool_F.C._9%E2%80%930_AFC_Bournemouth" title="Liverpool F.C. 9–0 AFC Bournemouth">in 2022</a>
+[40]:<a href="/wiki/Portman_Road" title="Portman Road">Portman Road</a>
+[41]:<a href="/wiki/Eric_Cantona" title="Eric Cantona">Eric Cantona</a>
+[42]:<a href="/wiki/Andy_Cole" title="Andy Cole">Andy Cole</a>
+[43]:<a href="/wiki/Mark_Hughes" title="Mark Hughes">Mark Hughes</a>
+[44]:<a href="/wiki/Pundit" title="Pundit">pundits</a>
+[45]:<a href="/wiki/Manchester_United_F.C._9%E2%80%930_Ipswich_Town_F.C." title="Manchester United F.C. 9–0 Ipswich Town F.C.">Full article...</a>
+[46]:<a href="/wiki/Illinois_Public_Access_Opinion_16-006" title="Illinois Public Access Opinion 16-006">Illinois Public Access Opinion 16-006</a>
+[47]:<a href="/wiki/U.S._Route_34_in_Iowa" title="U.S. Route 34 in Iowa">U.S. Route 34 in Iowa</a>
+[48]:<a href="/wiki/Ulfcytel" title="Ulfcytel">Ulfcytel</a>
+[49]:<a href="/wiki/Wikipedia:Today%27s_featured_article/October_2025" title="Wikipedia:Today's featured article/October 2025">Archive</a>
+[50]:<a class="extiw" href="https://lists.wikimedia.org/postorius/lists/daily-article-l.lists.wikimedia.org/" title="mail:daily-article-l">By email</a>
+[51]:<a class="mw-redirect" href="/wiki/Wikipedia:Featured_articles_(linked_from_TFAfooter)" title="Wikipedia:Featured articles (linked from TFAfooter)">More featured articles</a>
+[52]:<a href="/wiki/Wikipedia:About_Today%27s_featured_article" title="Wikipedia:About Today's featured article">About</a>
+[53]:<a class="mw-file-description" href="/wiki/File:Tri%E1%BB%87u_Qu%C3%A2n_S%E1%BB%B1.png" title="Triệu Quân Sự"></a>
+[54]:<a href="/wiki/Tri%E1%BB%87u_Qu%C3%A2n_S%E1%BB%B1" title="Triệu Quân Sự">Triệu Quân Sự</a>
+[55]:<a href="/wiki/Burnham_Copse_Infant_School" title="Burnham Copse Infant School">a British school inspired by a circus tent</a>
+[56]:<a href="/wiki/Royal_Institute_of_British_Architects#RIBA_Awards" title="Royal Institute of British Architects">RIBA Award</a>
+[57]:<a href="/wiki/Panka_Pelishek" title="Panka Pelishek">Panka Pelishek</a>
+[58]:<a href="/wiki/29_BC_Yellow_River_flood" title="29 BC Yellow River flood">29 BC Yellow River flood</a>
+[59]:<a href="/wiki/Ruth_El_Saffar" title="Ruth El Saffar">Ruth El Saffar</a>
+[60]:<a href="/wiki/Rapture_Encaged" title="Rapture Encaged">her final book</a>
+[61]:<a href="/wiki/Diana_de_Armas_Wilson" title="Diana de Armas Wilson">Diana de Armas Wilson</a>
+[62]:<a href="/wiki/Quixotic_Desire" title="Quixotic Desire">Quixotic Desire</a>
+[63]:<a href="/wiki/Ghost_Chips" title="Ghost Chips">a public service announcement about drunk driving</a>
+[64]:<a href="/wiki/Denise_Stoklos" title="Denise Stoklos">Denise Stoklos</a>
+[65]:<a href="/wiki/Makeup_of_Donald_Trump" title="Makeup of Donald Trump">Donald Trump applies his own makeup</a>
+[66]:<a href="/wiki/Stephanie_Grisham" title="Stephanie Grisham">his former press secretary</a>
+[67]:<a href="/wiki/Spencer_Reid_(American_football)" title="Spencer Reid (American football)">Spencer Reid</a>
+[68]:<a href="/wiki/Wikipedia:Recent_additions" title="Wikipedia:Recent additions">Archive</a>
+[69]:<a href="/wiki/Help:Your_first_article" title="Help:Your first article">Start a new article</a>
+[70]:<a href="/wiki/Template_talk:Did_you_know" title="Template talk:Did you know">Nominate an article</a>
+[71]:<a class="mw-file-description" href="/wiki/File:Galerie_d%27Apollon_(Louvre).jpg" title="Galerie d'Apollon in the Louvre in January 2024"></a>
+[72]:<a href="/wiki/French_Crown_Jewels" title="French Crown Jewels">French Crown Jewels</a>
+[73]:<a href="/wiki/2025_Louvre_robbery" title="2025 Louvre robbery">a robbery</a>
+[74]:<a href="/wiki/Galerie_d%27Apollon" title="Galerie d'Apollon">Galerie d'Apollon</a>
+[75]:<a href="/wiki/Louvre" title="Louvre">Louvre</a>
+[76]:<a href="/wiki/Michael_Randrianirina" title="Michael Randrianirina">Michael Randrianirina</a>
+[77]:<a href="/wiki/Andry_Rajoelina" title="Andry Rajoelina">Andry Rajoelina</a>
+[78]:<a href="/wiki/2025_Malagasy_protests" title="2025 Malagasy protests">mass protests</a>
+[79]:<a href="/wiki/2025_Malagasy_coup_d%27%C3%A9tat" title="2025 Malagasy coup d'état">a military coup</a>
+[80]:<a href="/wiki/Dallin_H._Oaks" title="Dallin H. Oaks">Dallin H. Oaks</a>
+[81]:<a href="/wiki/The_Church_of_Jesus_Christ_of_Latter-day_Saints" title="The Church of Jesus Christ of Latter-day Saints">The Church of Jesus Christ of Latter-day Saints</a>
+[82]:<a href="/wiki/Joel_Mokyr" title="Joel Mokyr">Joel Mokyr</a>
+[83]:<a href="/wiki/Philippe_Aghion" title="Philippe Aghion">Philippe Aghion</a>
+[84]:<a href="/wiki/Peter_Howitt_(economist)" title="Peter Howitt (economist)">Peter Howitt</a>
+[85]:<a href="/wiki/Nobel_Memorial_Prize_in_Economic_Sciences" title="Nobel Memorial Prize in Economic Sciences">Nobel Prize in Economics</a>
+[86]:<a href="/wiki/Gaza_war" title="Gaza war">Gaza war</a>
+[87]:<a href="/wiki/Timeline_of_the_Gaza_war_(3_October_2025_%E2%80%93_present)" title="Timeline of the Gaza war (3 October 2025 – present)">timeline</a>
+[88]:<a href="/wiki/Gaza_genocide" title="Gaza genocide">genocide</a>
+[89]:<a href="/wiki/Russo-Ukrainian_war_(2022%E2%80%93present)" title="Russo-Ukrainian war (2022–present)">Russo-Ukrainian war</a>
+[90]:<a href="/wiki/Timeline_of_the_Russo-Ukrainian_war_(1_September_2025_%E2%80%93_present)" title="Timeline of the Russo-Ukrainian war (1 September 2025 – present)">timeline</a>
+[91]:<a href="/wiki/Sudanese_civil_war_(2023%E2%80%93present)" title="Sudanese civil war (2023–present)">Sudanese civil war</a>
+[92]:<a href="/wiki/Timeline_of_the_Sudanese_civil_war_(2025)" title="Timeline of the Sudanese civil war (2025)">timeline</a>
+[93]:<a href="/wiki/Deaths_in_2025" title="Deaths in 2025">Recent deaths</a>
+[94]:<a href="/wiki/Daniel_Naroditsky" title="Daniel Naroditsky">Daniel Naroditsky</a>
+[95]:<a href="/wiki/Lady_Annabel_Goldsmith" title="Lady Annabel Goldsmith">Lady Annabel Goldsmith</a>
+[96]:<a href="/wiki/Charles_J._Otto" title="Charles J. Otto">Charles J. Otto</a>
+[97]:<a href="/wiki/Tomonobu_Itagaki" title="Tomonobu Itagaki">Tomonobu Itagaki</a>
+[98]:<a href="/wiki/Larry_Williams_(American_football)" title="Larry Williams (American football)">Larry Williams</a>
+[99]:<a href="/wiki/Grubby_(opossum)" title="Grubby (opossum)">Grubby</a>
+[100]:<a href="/wiki/Portal:Current_events" title="Portal:Current events">More current events</a>
+[101]:<a href="/wiki/Wikipedia:In_the_news/Candidates" title="Wikipedia:In the news/Candidates">Nominate an article</a>
+[102]:<a href="/wiki/October_21" title="October 21">October 21</a>
+[103]:<a class="mw-tmh-play" href="/wiki/File:Offenbach_-_Orpheus_in_the_Underworld_-_Overture,_Can_Can_section.ogg" title="Play audio" role="button"></a>
+[104]:<a href="/wiki/1345" title="1345">1345</a>
+[105]:<a href="/wiki/Hundred_Years%27_War" title="Hundred Years' War">Hundred Years' War</a>
+[106]:<a href="/wiki/Battle_of_Auberoche" title="Battle of Auberoche">Battle of Auberoche</a>
+[107]:<a href="/wiki/Aquitaine" title="Aquitaine">Aquitaine</a>
+[108]:<a href="/wiki/1858" title="1858">1858</a>
+[109]:<a href="/wiki/Jacques_Offenbach" title="Jacques Offenbach">Jacques Offenbach</a>
+[110]:<a href="/wiki/Operetta" title="Operetta">operetta</a>
+[111]:<a href="/wiki/Orpheus_in_the_Underworld" title="Orpheus in the Underworld">Orpheus in the Underworld</a>
+[112]:<a href="/wiki/Can-can" title="Can-can">can-can</a>
+[113]:<a href="/wiki/Th%C3%A9%C3%A2tre_des_Bouffes-Parisiens" title="Théâtre des Bouffes-Parisiens">Théâtre des Bouffes-Parisiens</a>
+[114]:<a href="/wiki/1910" title="1910">1910</a>
+[115]:<a href="/wiki/HMS_Niobe_(1897)" title="HMS Niobe (1897)">HMS Niobe</a>
+[116]:<a href="/wiki/Halifax_Harbour" title="Halifax Harbour">Halifax Harbour</a>
+[117]:<a href="/wiki/Royal_Canadian_Navy" title="Royal Canadian Navy">Royal Canadian Navy</a>
+[118]:<a href="/wiki/1959" title="1959">1959</a>
+[119]:<a href="/wiki/Solomon_R._Guggenheim_Museum" title="Solomon R. Guggenheim Museum">Solomon R. Guggenheim Museum</a>
+[120]:<a href="/wiki/Frank_Lloyd_Wright" title="Frank Lloyd Wright">Frank Lloyd Wright</a>
+[121]:<a href="/wiki/1994" title="1994">1994</a>
+[122]:<a href="/wiki/Agreed_Framework" title="Agreed Framework">Agreed Framework</a>
+[123]:<a href="/wiki/North_Korea_and_weapons_of_mass_destruction" title="North Korea and weapons of mass destruction">the former's nuclear weapons program</a>
+[124]:<a href="/wiki/Sims_Reeves" title="Sims Reeves">Sims Reeves</a>
+[125]:<a href="/wiki/Dorothy_Hale" title="Dorothy Hale">Dorothy Hale</a>
+[126]:<a href="/wiki/Yulimar_Rojas" title="Yulimar Rojas">Yulimar Rojas</a>
+[127]:<a href="/wiki/Ein%C3%A1r" title="Einár">Einár</a>
+[128]:<a href="/wiki/October_20" title="October 20">October 20</a>
+[129]:<a href="/wiki/October_21" title="October 21">October 21</a>
+[130]:<a href="/wiki/October_22" title="October 22">October 22</a>
+[131]:<a href="/wiki/Wikipedia:Selected_anniversaries/October" title="Wikipedia:Selected anniversaries/October">Archive</a>
+[132]:<a class="extiw" href="https://lists.wikimedia.org/postorius/lists/daily-article-l.lists.wikimedia.org/" title="mail:daily-article-l">By email</a>
+[133]:<a href="/wiki/List_of_days_of_the_year" title="List of days of the year">List of days of the year</a>
+[134]:<a href="/wiki/Wikipedia:Selected_anniversaries" title="Wikipedia:Selected anniversaries">About</a>
+[135]:<a class="mw-file-description" href="/wiki/File:Sister_lighting_traditional_lamp_during_Tihar_festival_(edited).jpg" title="Tihar"></a>
+[136]:<a href="/wiki/Tihar_(festival)" title="Tihar (festival)">Tihar</a>
+[137]:<a href="/wiki/Sikkim" title="Sikkim">Sikkim</a>
+[138]:<a href="/wiki/Darjeeling" title="Darjeeling">Darjeeling</a>
+[139]:<a href="/wiki/Assam" title="Assam">Assam</a>
+[140]:<a href="/wiki/Nepalis" title="Nepalis">Nepalese</a>
+[141]:<a href="/wiki/Indian_Gorkha" title="Indian Gorkha">Indian Gorkha</a>
+[142]:<a href="/wiki/Diwali" title="Diwali">Diwali</a>
+[143]:<a href="/wiki/Indian_subcontinent" title="Indian subcontinent">Indian subcontinent</a>
+[144]:<a href="/wiki/Yama" title="Yama">Yama</a>
+[145]:<a href="/wiki/Lakshmi_Puja" title="Lakshmi Puja">Lakshmi Puja</a>
+[146]:<a href="/wiki/Telgha" title="Telgha">Telgha</a>
+[147]:<a class="extiw" href="https://commons.wikimedia.org/wiki/user:Mithunkunwar9" title="commons:user:Mithunkunwar9">Mithun Kunwar</a>
+[148]:<a href="/wiki/Template:POTD/2025-10-20" title="Template:POTD/2025-10-20">Crescent-faced antpitta</a>
+[149]:<a href="/wiki/Template:POTD/2025-10-19" title="Template:POTD/2025-10-19">Christ Church Cathedral</a>
+[150]:<a href="/wiki/Template:POTD/2025-10-18" title="Template:POTD/2025-10-18">The Window</a>
+[151]:<a href="/wiki/Wikipedia:Picture_of_the_day/Archive" title="Wikipedia:Picture of the day/Archive">Archive</a>
+[152]:<a href="/wiki/Wikipedia:Featured_pictures" title="Wikipedia:Featured pictures">More featured pictures</a>
+[153]:<a href="/wiki/Wikipedia:Community_portal" title="Wikipedia:Community portal">Community portal</a>
+[154]:<a href="/wiki/Wikipedia:Village_pump" title="Wikipedia:Village pump">Village pump</a>
+[155]:<a href="/wiki/Wikipedia:News" title="Wikipedia:News">Site news</a>
+[156]:<a href="/wiki/Wikipedia:Teahouse" title="Wikipedia:Teahouse">Teahouse</a>
+[157]:<a href="/wiki/Wikipedia:Help_desk" title="Wikipedia:Help desk">Help desk</a>
+[158]:<a href="/wiki/Wikipedia:Reference_desk" title="Wikipedia:Reference desk">Reference desk</a>
+[159]:<a href="/wiki/Wikipedia:Contents/Portals" title="Wikipedia:Contents/Portals">Content portals</a>
+[160]:<a href="/wiki/Wikimedia_Foundation" title="Wikimedia Foundation">Wikimedia Foundation</a>
+[161]:<a class="extiw" href="https://wikimediafoundation.org/our-work/wikimedia-projects/" title="foundationsite:our-work/wikimedia-projects/">projects</a>
+[162]:<a href="https://commons.wikimedia.org/wiki/" title="Commons"></a>
+[163]:<a class="extiw" href="https://commons.wikimedia.org/wiki/" title="c:">Commons</a>
+[164]:<a href="https://www.mediawiki.org/wiki/" title="MediaWiki"></a>
+[165]:<a class="extiw" href="https://www.mediawiki.org/wiki/" title="mw:">MediaWiki</a>
+[166]:<a href="https://meta.wikimedia.org/wiki/" title="Meta-Wiki"></a>
+[167]:<a class="extiw" href="https://meta.wikimedia.org/wiki/" title="m:">Meta-Wiki</a>
+[168]:<a href="https://en.wikibooks.org/wiki/" title="Wikibooks"></a>
+[169]:<a class="extiw" href="https://en.wikibooks.org/wiki/" title="b:">Wikibooks</a>
+[170]:<a href="https://www.wikidata.org/wiki/" title="Wikidata"></a>
+[171]:<a class="extiw" href="https://www.wikidata.org/wiki/" title="d:">Wikidata</a>
+[172]:<a href="https://en.wikinews.org/wiki/" title="Wikinews"></a>
+[173]:<a class="extiw" href="https://en.wikinews.org/wiki/" title="n:">Wikinews</a>
+[174]:<a href="https://en.wikiquote.org/wiki/" title="Wikiquote"></a>
+[175]:<a class="extiw" href="https://en.wikiquote.org/wiki/" title="q:">Wikiquote</a>
+[176]:<a href="https://en.wikisource.org/wiki/" title="Wikisource"></a>
+[177]:<a class="extiw" href="https://en.wikisource.org/wiki/" title="s:">Wikisource</a>
+[178]:<a href="https://species.wikimedia.org/wiki/" title="Wikispecies"></a>
+[179]:<a class="extiw" href="https://species.wikimedia.org/wiki/" title="species:">Wikispecies</a>
+[180]:<a href="https://en.wikiversity.org/wiki/" title="Wikiversity"></a>
+[181]:<a class="extiw" href="https://en.wikiversity.org/wiki/" title="v:">Wikiversity</a>
+[182]:<a href="https://en.wikivoyage.org/wiki/" title="Wikivoyage"></a>
+[183]:<a class="extiw" href="https://en.wikivoyage.org/wiki/" title="voy:">Wikivoyage</a>
+[184]:<a href="https://en.wiktionary.org/wiki/" title="Wiktionary"></a>
+[185]:<a class="extiw" href="https://en.wiktionary.org/wiki/" title="wikt:">Wiktionary</a>
+[186]:<a href="/wiki/English_language" title="English language">English</a>
+[187]:<a class="extiw" href="https://meta.wikimedia.org/wiki/List_of_Wikipedias" title="meta:List of Wikipedias">other Wikipedias are available</a>
+[188]:<a class="external text" href="https://ar.wikipedia.org/wiki/">العربية</a>
+[189]:<a class="external text" href="https://de.wikipedia.org/wiki/">Deutsch</a>
+[190]:<a class="external text" href="https://es.wikipedia.org/wiki/">Español</a>
+[191]:<a class="external text" href="https://fa.wikipedia.org/wiki/">فارسی</a>
+[192]:<a class="external text" href="https://fr.wikipedia.org/wiki/">Français</a>
+[193]:<a class="external text" href="https://it.wikipedia.org/wiki/">Italiano</a>
+[194]:<a class="external text" href="https://nl.wikipedia.org/wiki/">Nederlands</a>
+[195]:<a class="external text" href="https://ja.wikipedia.org/wiki/">日本語</a>
+[196]:<a class="external text" href="https://pl.wikipedia.org/wiki/">Polski</a>
+[197]:<a class="external text" href="https://pt.wikipedia.org/wiki/">Português</a>
+[198]:<a class="external text" href="https://ru.wikipedia.org/wiki/">Русский</a>
+[199]:<a class="external text" href="https://sv.wikipedia.org/wiki/">Svenska</a>
+[200]:<a class="external text" href="https://uk.wikipedia.org/wiki/">Українська</a>
+[201]:<a class="external text" href="https://vi.wikipedia.org/wiki/">Tiếng Việt</a>
+[202]:<a class="external text" href="https://zh.wikipedia.org/wiki/">中文</a>
+[203]:<a class="external text" href="https://id.wikipedia.org/wiki/">Bahasa Indonesia</a>
+[204]:<a class="external text" href="https://ms.wikipedia.org/wiki/">Bahasa Melayu</a>
+[205]:<a class="external text" href="https://zh-min-nan.wikipedia.org/wiki/">Bân-lâm-gú</a>
+[206]:<a class="external text" href="https://bg.wikipedia.org/wiki/">Български</a>
+[207]:<a class="external text" href="https://ca.wikipedia.org/wiki/">Català</a>
+[208]:<a class="external text" href="https://cs.wikipedia.org/wiki/">Čeština</a>
+[209]:<a class="external text" href="https://da.wikipedia.org/wiki/">Dansk</a>
+[210]:<a class="external text" href="https://et.wikipedia.org/wiki/">Eesti</a>
+[211]:<a class="external text" href="https://el.wikipedia.org/wiki/">Ελληνικά</a>
+[212]:<a class="external text" href="https://eo.wikipedia.org/wiki/">Esperanto</a>
+[213]:<a class="external text" href="https://eu.wikipedia.org/wiki/">Euskara</a>
+[214]:<a class="external text" href="https://he.wikipedia.org/wiki/">עברית</a>
+[215]:<a class="external text" href="https://hy.wikipedia.org/wiki/">Հայերեն</a>
+[216]:<a class="external text" href="https://ko.wikipedia.org/wiki/">한국어</a>
+[217]:<a class="external text" href="https://hu.wikipedia.org/wiki/">Magyar</a>
+[218]:<a class="external text" href="https://no.wikipedia.org/wiki/">Norsk bokmål</a>
+[219]:<a class="external text" href="https://ro.wikipedia.org/wiki/">Română</a>
+[220]:<a class="external text" href="https://simple.wikipedia.org/wiki/">Simple English</a>
+[221]:<a class="external text" href="https://sk.wikipedia.org/wiki/">Slovenčina</a>
+[222]:<a class="external text" href="https://sr.wikipedia.org/wiki/">Srpski</a>
+[223]:<a class="external text" href="https://sh.wikipedia.org/wiki/">Srpskohrvatski</a>
+[224]:<a class="external text" href="https://fi.wikipedia.org/wiki/">Suomi</a>
+[225]:<a class="external text" href="https://tr.wikipedia.org/wiki/">Türkçe</a>
+[226]:<a class="external text" href="https://uz.wikipedia.org/wiki/">Oʻzbekcha</a>
+[227]:<a class="external text" href="https://ast.wikipedia.org/wiki/">Asturianu</a>
+[228]:<a class="external text" href="https://az.wikipedia.org/wiki/">Azərbaycanca</a>
+[229]:<a class="external text" href="https://bn.wikipedia.org/wiki/">বাংলা</a>
+[230]:<a class="external text" href="https://bs.wikipedia.org/wiki/">Bosanski</a>
+[231]:<a class="external text" href="https://ckb.wikipedia.org/wiki/">کوردی</a>
+[232]:<a class="external text" href="https://fy.wikipedia.org/wiki/">Frysk</a>
+[233]:<a class="external text" href="https://ga.wikipedia.org/wiki/">Gaeilge</a>
+[234]:<a class="external text" href="https://gl.wikipedia.org/wiki/">Galego</a>
+[235]:<a class="external text" href="https://hr.wikipedia.org/wiki/">Hrvatski</a>
+[236]:<a class="external text" href="https://ka.wikipedia.org/wiki/">ქართული</a>
+[237]:<a class="external text" href="https://ku.wikipedia.org/wiki/">Kurdî</a>
+[238]:<a class="external text" href="https://lv.wikipedia.org/wiki/">Latviešu</a>
+[239]:<a class="external text" href="https://lt.wikipedia.org/wiki/">Lietuvių</a>
+[240]:<a class="external text" href="https://ml.wikipedia.org/wiki/">മലയാളം</a>
+[241]:<a class="external text" href="https://mk.wikipedia.org/wiki/">Македонски</a>
+[242]:<a class="external text" href="https://my.wikipedia.org/wiki/">မြန်မာဘာသာ</a>
+[243]:<a class="external text" href="https://nn.wikipedia.org/wiki/">Norsk nynorsk</a>
+[244]:<a class="external text" href="https://pa.wikipedia.org/wiki/">ਪੰਜਾਬੀ</a>
+[245]:<a class="external text" href="https://sq.wikipedia.org/wiki/">Shqip</a>
+[246]:<a class="external text" href="https://sl.wikipedia.org/wiki/">Slovenščina</a>
+[247]:<a class="external text" href="https://th.wikipedia.org/wiki/">ไทย</a>
+[248]:<a class="external text" href="https://te.wikipedia.org/wiki/">తెలుగు</a>
+[249]:<a class="external text" href="https://ur.wikipedia.org/wiki/">اردو</a>
+[250]:<input id="p-lang-btn-checkbox" class="vector-dropdown-checkbox mw-interlanguage-selector" type="checkbox" role="button" aria-label="Go to an article in another language. Available in 353 languages"></input>
+[251]:<a href="/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License" title="Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License">Creative Commons Attribution-ShareAlike 4.0 Licens</a>
+[252]:<a class="extiw" href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Terms_of_Use" title="foundation:Special:MyLanguage/Policy:Terms of Use">Terms of Use</a>
+[253]:<a class="extiw" href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy" title="foundation:Special:MyLanguage/Policy:Privacy policy">Privacy Policy</a>
+[254]:<a class="external text" href="https://wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>
+[255]:<a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy">Privacy policy</a>
+[256]:<a href="/wiki/Wikipedia:About">About Wikipedia</a>
+[257]:<a href="/wiki/Wikipedia:General_disclaimer">Disclaimers</a>
+[258]:<a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a>
+[259]:<a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct">Code of Conduct</a>
+[260]:<a href="https://developer.wikimedia.org">Developers</a>
+[261]:<a href="https://stats.wikimedia.org/#/en.wikipedia.org">Statistics</a>
+[262]:<a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement">Cookie statement</a>
+[263]:<a class="noprint stopMobileRedirectToggle" href="//en.wikipedia.org/w/index.php?title=Main_Page&mobileaction=toggle_view_mobile">Mobile view</a>
+[264]:<a class="cdx-button cdx-button--fake-button cdx-button--siz..." href="https://www.wikimedia.org/"></a>
+[265]:<a class="cdx-button cdx-button--fake-button cdx-button--siz..." href="https://www.mediawiki.org/"></a>

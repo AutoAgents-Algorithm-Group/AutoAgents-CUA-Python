@@ -1,0 +1,41 @@
+[project]
+name = "autoagents-cua"
+version = "0.0.1"
+description = "SDK for interacting with AutoAgents.ai API"
+readme = "README.md"
+authors = [
+    { name = "Hehua Fan", email = "forhheart5532@gmail.com" }
+    { name = "Haolan Yang", email = "returnzero486@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.11.7",
+    "requests>=2.32.4",
+    "python-pptx>=0.6.21",
+    "matplotlib",
+    "pandas",
+    "seaborn",
+    "mcp[cli]",
+    "e2b-code-interpreter",
+    "openpyxl",
+    "supabase",
+    "SQLAlchemy",
+    "psycopg2-binary",
+    "playwright",
+    "beautifulsoup4",
+    "DrissionPage>=4.0.0",
+    "pydub",
+    "SpeechRecognition",
+    "langchain>=1.0.0",
+    "langgraph>=1.0.0",
+]
+
+[project.scripts]
+autoagents-cua-python-sdk = "autoagents-cua:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/autoagents_web"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
