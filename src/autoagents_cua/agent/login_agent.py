@@ -1,8 +1,8 @@
-from ..logging import logger, set_stage
-from ...models import Stage
-from ..page_extractor import PageExtractor
-from ..shadow_dom_parser import ShadowDOMParser
-from ..web_operator import WebOperator
+from ..utils.logging import logger, set_stage
+from ..models import Stage
+from ..utils.page_extractor import PageExtractor
+from ..utils.shadow_dom_parser import ShadowDOMParser
+from ..utils.web_operator import WebOperator
 
 
 class LoginAgent:
@@ -114,4 +114,5 @@ class LoginAgent:
             log.error(f"登录失败: {e}")
             log.exception("登录异常详情")
             return False
+
 

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/-Mikeno-000000?style=for-the-badge&labelColor=faf9f6&color=faf9f6&logoColor=000000" alt="Mikeno" width="280"/>
+<img src="https://img.shields.io/badge/-AutoAgents--CUA-000000?style=for-the-badge&labelColor=faf9f6&color=faf9f6&logoColor=000000" alt="AutoAgents-CUA-Python" width="320"/>
 
-<h4>AI 驱动的智能浏览器自动化平台</h4>
+<h4>计算机使用代理 Python SDK</h4>
 
 [English](README.md) | **简体中文**
 
@@ -13,44 +13,26 @@
 
 </div>
 
-以维龙加山脉中最具挑战性的米凯诺峰命名，这个平台代表了浏览器自动化技术的巅峰 - 强大、智能，能够征服最复杂的网页自动化挑战。
+AutoAgents-CUA-Python（计算机使用代理）是一个先进的 AI 驱动浏览器自动化框架，将大语言模型与智能网页自动化能力相结合。基于 DrissionPage 构建，由最先进的 AI 模型驱动，将复杂的网页自动化任务转化为简单、可靠的操作。
 
 ## 目录
 - [目录](#目录)
-- [为什么选择 Mikeno？](#为什么选择-mikeno)
+- [为什么选择 AutoAgents CUA？](#为什么选择-autoagents-cua)
   - [核心能力](#核心能力)
     - [智能自动化](#智能自动化)
     - [高性能架构](#高性能架构)
     - [开发者体验](#开发者体验)
-  - [Mikeno 能做什么？](#mikeno-能做什么)
+  - [AutoAgents CUA 能做什么？](#autoagents-cua-能做什么)
   - [技术基础](#技术基础)
 - [快速开始](#快速开始)
   - [前提条件](#前提条件)
-  - [使用 setup.sh 自动安装（推荐）](#使用-setupsh-自动安装推荐)
-  - [手动安装（备选方案）](#手动安装备选方案)
-  - [基本使用示例（SDK 模式）](#基本使用示例sdk-模式)
-- [部署](#部署)
-  - [Docker 部署（推荐）](#docker-部署推荐)
-  - [环境配置](#环境配置)
-  - [生产部署](#生产部署)
-  - [故障排除](#故障排除)
-- [项目结构](#项目结构)
-- [核心组件](#核心组件)
-  - [LoginAgent](#loginagent)
-  - [CaptchaAgent](#captchaagent)
-  - [WebOperator](#weboperator)
-  - [PageExtractor](#pageextractor)
-  - [ShadowDOMParser](#shadowdomparser)
-- [性能指标](#性能指标)
+  - [安装](#安装)
+  - [基本使用示例](#基本使用示例)
 - [贡献](#贡献)
-  - [开发指南](#开发指南)
-- [安全提示](#安全提示)
-- [许可证](#许可证)
-- [致谢](#致谢)
 
-## 为什么选择 Mikeno？
+## 为什么选择 AutoAgents CUA？
 
-Mikeno 是一个先进的浏览器自动化平台，将 AI 智能与强大的网页自动化能力相结合。基于 DrissionPage 构建，由 AI 模型驱动，Mikeno 将复杂的网页自动化任务转化为简单、可靠的操作。
+AutoAgents CUA（计算机使用代理）是一个先进的浏览器自动化平台，将 AI 智能与强大的网页自动化能力相结合。基于 DrissionPage 构建，由大语言模型驱动，AutoAgents CUA 将复杂的网页自动化任务转化为简单的自然语言驱动操作。
 
 ### 核心能力
 
@@ -72,8 +54,9 @@ Mikeno 是一个先进的浏览器自动化平台，将 AI 智能与强大的网
 - **模块化设计**：使用单个组件或完整的自动化套件
 - **丰富示例**：playground 目录中的即用示例
 
-### Mikeno 能做什么？
+### AutoAgents CUA 能做什么？
 
+- **自然语言自动化**：使用自然语言命令控制浏览器
 - **自动登录**：处理包括双因素认证和验证码在内的复杂登录流程
 - **数据提取**：从动态网页中提取结构化数据
 - **表单自动化**：跨多个页面填写和提交表单
@@ -94,207 +77,67 @@ Mikeno 是一个先进的浏览器自动化平台，将 AI 智能与强大的网
 - Chrome 浏览器
 - Node.js 18+（可选，用于前端功能）
 
-### 使用 setup.sh 自动安装（推荐）
-
-最简单的 Mikeno 启动方式：
+### 安装
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/your-org/Mikeno.git
-cd Mikeno
+git clone https://github.com/your-org/AutoAgents-CUA-Python.git
+cd AutoAgents-CUA-Python
 
-# 2. 使脚本可执行并运行
-chmod +x setup.sh
-./setup.sh
+# 2. 安装依赖
+pip install -e .
 
-# 3. 配置您的 API 密钥
-# 编辑 backend/config.yaml 添加您的 API 凭据
-
-# 4. 运行示例自动化
-cd backend
-python playground/test_login_agent.py
+# 3. 设置环境变量
+export OPENAI_API_KEY="your-api-key"
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+export OPENAI_MODEL="gpt-4o"
 ```
 
-### 手动安装（备选方案）
-
-```bash
-# 克隆并进入目录
-git clone https://github.com/your-org/Mikeno.git
-cd Mikeno
-
-# 安装后端依赖
-cd backend
-pip install -r requirements.txt
-
-# 配置 API 密钥
-cp config.yaml.example config.yaml
-# 编辑 config.yaml 添加您的凭据
-
-# 运行测试
-python playground/test_login_agent.py
-```
-
-### 基本使用示例（SDK 模式）
+### 基本使用示例
 
 ```python
-from src.autoagents_cua.utils import LoginAgent, CaptchaAgent
+from autoagents_cua.client import ChatClient
+from autoagents_cua.models import ClientConfig, ModelConfig
+from autoagents_cua.computer import Browser
+from autoagents_cua.agent import BrowserAgent
+from autoagents_cua.tools import ALL_WEB_TOOLS
 
-# 初始化 CaptchaAgent（直接传入配置）
-captcha_agent = CaptchaAgent(
-    api_key="your-api-key",
-    base_url="https://api.openai.com/v1",
-    model="gpt-4o"
+# 1. 创建 LLM 客户端
+llm = ChatClient(
+    client_config=ClientConfig(
+        base_url="https://api.openai.com/v1",
+        api_key="your-api-key"
+    ),
+    model_config=ModelConfig(
+        name="gpt-4o",
+        temperature=0.0
+    )
 )
 
-# 初始化 LoginAgent（直接传入配置）
-login_agent = LoginAgent(
-    url="https://example.com/login",
-    captcha_agent=captcha_agent,
+# 2. 创建 Browser
+browser = Browser(
     headless=False,
-    wait_time=3
+    window_size={'width': 1000, 'height': 700}
 )
 
-# 执行自动登录
-success = login_agent.login(
-    username='your_username',
-    password='your_password',
-    username_selector='xpath://input[@name="username"]',
-    password_selector='xpath://input[@name="password"]',
-    button_selector='xpath://button[@type="submit"]',
-    auto_handle_captcha=True
+# 3. 创建 BrowserAgent
+agent = BrowserAgent(
+    browser=browser,
+    llm=llm,
+    tools=ALL_WEB_TOOLS
 )
 
-if success:
-    print("登录成功！")
-    
-login_agent.close()
+# 4. 使用自然语言执行任务
+agent.invoke("请帮我打开谷歌并搜索 'Python 自动化'")
+agent.invoke("点击第一个搜索结果")
+agent.invoke("提取这个页面的主要内容")
+
+# 5. 清理
+agent.close()
 ```
 
-更多示例请查看 [SDK_USAGE.md](SDK_USAGE.md)
+更多示例请查看 `playground/` 目录。
 
-## 部署
-
-### Docker 部署（推荐）
-
-```bash
-cd Mikeno
-docker compose -f docker/docker-compose.yml up -d
-```
-
-### 环境配置
-
-创建 `backend/config.yaml`：
-
-```yaml
-# 验证码识别配置
-captcha_agent:
-  api_key: "your-api-key"
-  base_url: "https://api.example.com/v1"
-  model: "gemini-2.5-pro"
-
-# 登录自动化配置
-login_agent:
-  url: "https://example.com/login"
-  username: "your_username"
-  password: "your_password"
-  headless: false
-  wait_time: 3
-  auto_handle_captcha: true
-```
-
-### 生产部署
-
-```bash
-# 构建生产镜像
-docker build -t mikeno-prod -f docker/Dockerfile .
-
-# 使用生产设置运行
-docker run -d \
-  --name mikeno \
-  -v $(pwd)/backend/config.yaml:/app/config.yaml \
-  -v $(pwd)/backend/logs:/app/logs \
-  mikeno-prod
-```
-
-### 故障排除
-
-```bash
-# 查看应用程序日志
-docker compose -f docker/docker-compose.yml logs -f app
-
-# 检查容器状态
-docker compose -f docker/docker-compose.yml ps
-
-# 重启服务
-docker compose -f docker/docker-compose.yml restart
-
-# 停止并清理
-docker compose -f docker/docker-compose.yml down
-docker rmi mikeno-app
-```
-
-## 项目结构
-
-```
-Mikeno/
-├── backend/
-│   ├── src/
-│   │   ├── models/
-│   │   │   ├── captcha.py              # 验证码数据模型
-│   │   │   └── stage.py                # 日志阶段定义
-│   │   ├── services/
-│   │   │   └── reddit/                 # 平台特定服务
-│   │   └── utils/
-│   │       ├── agent/
-│   │       │   └── login_agent.py      # 登录自动化代理
-│   │       ├── captcha_solver/
-│   │       │   ├── common.py           # 通用验证码识别器
-│   │       │   └── google.py           # Google reCAPTCHA 识别器
-│   │       ├── config_loader.py        # 配置管理
-│   │       ├── image_converter.py      # 图像处理工具
-│   │       ├── logging.py              # 日志系统
-│   │       ├── page_extractor.py       # 高性能元素提取
-│   │       ├── shadow_dom_parser.py    # Shadow DOM 处理
-│   │       └── web_operator.py         # 核心浏览器操作
-│   ├── playground/
-│   │   ├── test_login_agent.py         # 登录自动化示例
-│   │   ├── test_captcha_agent.py       # 验证码识别示例
-│   │   ├── test_page_extractor.py      # 元素提取示例
-│   │   ├── test_web_operator.py        # 浏览器操作示例
-│   │   └── utils/captcha/
-│   │       └── test_google.py          # Google reCAPTCHA 示例
-│   ├── config.yaml                     # 主配置文件
-│   ├── requirements.txt                # Python 依赖
-│   └── logs/                           # 应用程序日志
-├── docker/
-│   └── docker-compose.yml              # Docker 编排
-└── README.md
-```
-
-## 核心组件
-
-### LoginAgent
-智能登录自动化，支持自动检测和验证码处理。
-
-### CaptchaAgent
-AI 驱动的验证码识别，支持多种验证码类型。
-
-### WebOperator
-底层浏览器控制，提供全面的元素交互方法。
-
-### PageExtractor
-高性能元素提取，速度提升 10-50 倍。
-
-### ShadowDOMParser
-完全支持 Shadow DOM 和 Web 组件。
-
-## 性能指标
-
-| 操作 | 传统方法 | Mikeno | 提升 |
-|------|---------|--------|------|
-| 元素提取（100+ 个元素） | 5-10 秒 | 0.3-0.8 秒 | 10-50 倍更快 |
-| 验证码识别 | 手动 / 30+ 秒 | 2-5 秒 | 完全自动化 |
-| 登录自动化 | 手动 / 60+ 秒 | 5-10 秒 | 6-12 倍更快 |
 
 ## 贡献
 
@@ -305,34 +148,3 @@ AI 驱动的验证码识别，支持多种验证码类型。
 3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
 4. 推送到分支 (`git push origin feature/amazing-feature`)
 5. 开启 Pull Request
-
-### 开发指南
-
-- 遵循 PEP 8 代码风格指南
-- 为新功能添加测试
-- 根据需要更新文档
-- 提交 PR 前确保所有测试通过
-
-## 安全提示
-
-**重要**：此工具仅设计用于合法的自动化目的。
-
-- 尊重网站服务条款
-- 不要滥用速率限制
-- 保护您的 API 凭据
-- 使用测试账户进行开发
-- 切勿将凭据提交到版本控制
-
-## 许可证
-
-本项目采用 GNU Affero 通用公共许可证 v3.0 (AGPL-3.0) - 详见 [LICENSE](LICENSE) 文件。
-
-**重要说明**：根据 AGPL-3.0，如果您修改此软件并在服务器上运行以供用户交互使用，您必须向这些用户提供修改后的源代码。
-
-## 致谢
-
-- 基于 [DrissionPage](https://github.com/g1879/DrissionPage) 构建 - 现代浏览器自动化框架
-- 由先进的 AI 视觉模型驱动智能自动化
-- 灵感来自雄伟的米凯诺峰 - 屹立不倒，征服挑战
-
-

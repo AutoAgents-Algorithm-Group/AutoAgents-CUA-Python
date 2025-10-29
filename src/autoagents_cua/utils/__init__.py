@@ -4,7 +4,6 @@ from .page_extractor import PageExtractor
 from .shadow_dom_parser import ShadowDOMParser
 from .web_operator import WebOperator
 from .captcha_solver import CaptchaAgent, GoogleRecaptchaSolver
-from .agent import LoginAgent
 from ..models import Stage
 
 __all__ = [
@@ -20,5 +19,4 @@ __all__ = [
     'WebOperator',
     'CaptchaAgent',
     'GoogleRecaptchaSolver',
-    'LoginAgent',
 ]
