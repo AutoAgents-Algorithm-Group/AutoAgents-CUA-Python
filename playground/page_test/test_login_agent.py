@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_web.utils import LoginAgent, CaptchaAgent, ConfigLoader, logger
+from src.autoagents_cua.utils import LoginAgent, CaptchaAgent, ConfigLoader, logger
 
 
 def main():

@@ -12,9 +12,9 @@ import sys
 # 添加项目路径
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from src.autoagents_web.utils.web_operator import WebOperator
-from src.autoagents_web.utils.page_extractor import PageExtractor
-from src.autoagents_web.utils.logging import logger
+from src.autoagents_cua.utils.web_operator import WebOperator
+from src.autoagents_cua.utils.page_extractor import PageExtractor
+from src.autoagents_cua.utils.logging import logger
 
 from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
@@ -23,7 +23,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from typing import Annotated
 from langgraph.prebuilt import InjectedState
 
-from src.autoagents_web.utils.agent import WebAgent
+from src.autoagents_cua.utils.agent import WebAgent
 from dotenv import load_dotenv
 # class WebAgent:
 #     """Web 操作 Agent - 结合 LLM 的智能网页操作"""
@@ -309,7 +309,7 @@ def simple_demo():
     logger.info("🚀 Web Agent 演示启动")
     
     # 创建 Agent
-    agent = WebAgent(headless=False)
+    agent = WebAgent(headless=False, api_key=os.getenv("OPENAI_API_KEY"), base_url=os.getenv("OPENAI_BASE_URL"), model="gemini-2.5-pro")
     
     try:
         # 示例1: 打开网站
@@ -359,8 +359,7 @@ def sample_demo1():
 
 
 if __name__ == "__main__":
-    from dotenv import load_dotenv
-    load_dotenv()
+    
 
     sample_demo1()
 

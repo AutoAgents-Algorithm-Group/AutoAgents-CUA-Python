@@ -9,8 +9,8 @@ import sys
 # 添加项目路径
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from src.autoagents_web.utils.agent import WebAgent
-from src.autoagents_web.utils.logging import logger
+from src.autoagents_cua.utils.agent import WebAgent
+from src.autoagents_cua.utils.logging import logger
 from dotenv import load_dotenv
 
 

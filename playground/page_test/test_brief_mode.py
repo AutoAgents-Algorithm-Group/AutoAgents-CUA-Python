@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from DrissionPage import WebPage, ChromiumOptions
-from src.autoagents_web.utils.page_extractor import PageExtractor
+from src.autoagents_cua.utils.page_extractor import PageExtractor
 
 
 def test_brief_mode():

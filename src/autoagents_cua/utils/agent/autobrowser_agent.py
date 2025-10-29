@@ -10,7 +10,7 @@ from langchain_core.callbacks import BaseCallbackHandler, CallbackManager
 from langgraph.checkpoint.memory import InMemorySaver
 from typing import Annotated, Any, Dict, List
 from langgraph.prebuilt import InjectedState
-from src.autoagents_web.utils.config_loader import get_autobrowser_agent_config
+from ..config_loader import get_autobrowser_agent_config
 import time
 from collections import defaultdict
 
@@ -105,7 +105,7 @@ class TokenUsageCallback(BaseCallbackHandler):
 class WebAgent:
     """Web 操作 Agent - 结合 LLM 的智能网页操作"""
     
-    def __init__(self, headless=False, api_key=None, base_url=None):
+    def __init__(self, headless=False, api_key=None, base_url=None, model=None):
         """
         初始化 Web Agent
         
@@ -115,7 +115,7 @@ class WebAgent:
             base_url: API Base URL
         """
         # 获取配置
-        config = get_autobrowser_agent_config()
+        # config = get_autobrowser_agent_config()
         
         # 创建 WebOperator
         self.operator = WebOperator(headless=headless)
@@ -128,9 +128,9 @@ class WebAgent:
         
         # 初始化 LLM
         self.llm = ChatOpenAI(
-            base_url=os.getenv("AUTOBROWSER_AGENT_API_BASEURL", "https://apihk.unifyllm.top/v1"),
-            api_key=os.getenv("AUTOBROWSER_AGENT_API_KEY"),
-            model=os.getenv("AUTOBROWSER_AGENT_MODEL", "gemini-2.5-pro"),
+            base_url=base_url ,
+            api_key=api_key,
+            model=model,
             temperature=0,  # 使用确定性输出
             callbacks=callback_manager  # 添加回调
         )

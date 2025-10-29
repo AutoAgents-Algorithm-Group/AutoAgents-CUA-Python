@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_web.utils.captcha_solver.google import GoogleRecaptchaSolver
+from src.autoagents_cua.utils.captcha_solver.google import GoogleRecaptchaSolver
 
 from DrissionPage import ChromiumPage, ChromiumOptions
 import time
