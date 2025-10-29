@@ -1,0 +1,42 @@
+================================================================================
+PubMed Central 爬取结果
+搜索关键词: characterization of solid superlubrication
+================================================================================
+
+
+================================================================================
+文章 #1
+================================================================================
+
+📖 标题:
+Hydration layer structure modulates superlubrication by trivalent La3+ electrolytes
+
+👥 作者:
+*
+Corresponding author. Email: xavier.banquy@umontreal.ca (X.B.); chzhang@tsinghua.edu.cn (C.Z.); maming16@tsinghua.edu.cn (M.M.)
+†
+These authors contributed equally to this work.
+‡
+Present address: School of Biomedical Engineering and Department of Applied Oral Sciences, Dalhousie University, Halifax, Nova Scotia, Canada.
+
+📄 摘要:
+Abstract
+Water-based lubricants provide lubrication of rubbing surfaces in many technical, biological, and physiological applications. The structure of hydrated ion layers adsorbed on solid surfaces that determine the lubricating properties of aqueous lubricants is thought to be invariable in hydration lubrication. However, we prove that the ion surface coverage dictates the roughness of the hydration layer and its lubricating properties, especially under subnanometer confinement. We characterize different hydration layer structures on surfaces lubricated by aqueous trivalent electrolytes. Two superlubrication regimes are observed with friction coefficients of 10−4 and 10−3, depending on the structure and thickness of the hydration layer. Each regime exhibits a distinct energy dissipation pathway and a different dependence to the hydration layer structure. Our analysis supports the idea of an intimate relationship between the dynamic structure of a boundary lubricant film and its tribological properties and offers a framework to study such relationship at the molecular level.
+
+
+================================================================================
+文章 #2
+================================================================================
+
+📖 标题:
+Designer Nanoparticles as Robust Superlubrication Vectors
+
+👥 作者:
+*
+Email: Jacob.klein@weizmann.ac.il.
+
+📄 摘要:
+Abstract
+Phosphatidylcholine lipid bilayers or liposomes at interfaces in aqueous environments can provide extremely efficient lubrication. This is attributed to the hydration lubrication mechanism acting at the highly hydrated phosphocholine-headgroup layers exposed at the outer surface of each bilayer. Micelles exposing such phosphocholine groups could be an attractive alternative to liposomes due to their much easier preparation and structure control, but all studies to date of surfactant micelles have revealed that at relatively low normal stresses the surface layers rupture and friction increases abruptly. Here, we examine surface interactions between three kinds of phosphocholine-exposing micelles with different designed structures: single-tail surfactant micelles, homo-oligomeric micelles, and block copolymer micelles. Normal and shear forces between mica surfaces immersed in solutions of these micelles were measured using a surface force balance. The adsorbed layers on the mica were imaged using atomic force microscope, revealing surface structures ranging from wormlike to spherical micelles. The block copolymer micelles showed relatively low coverage arising from their stabilizing corona and consequently poor lubrication (μ ∼ 10–1). In contrast, the surfactant and homo-oligomeric micelles fully covered the mica surface and demonstrated excellent lubrication (μ ∼ O(10–3)). However, while the boundary layer of single-tailed surfactant micelles degraded under moderate pressure, the homo-oligomeric micellar boundary layer was robust at all applied contact pressures in our study (up to about 5 MPa). We attribute the difference to the much greater energy required to remove a homo-oligomeric molecule from its micelle, resulting in far greater stability under pressure and shear.
+Keywords: phosphocholinated micelles, hydration lubrication, surfactant micelles, block copolymer micelles, wormlike micelles, micelles on surfaces, homo-oligomeric micelles
+
