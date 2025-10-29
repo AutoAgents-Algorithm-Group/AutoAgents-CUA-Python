@@ -2,9 +2,13 @@
 网页操作器 - 提供通用的网页元素操作功能
 """
 from time import sleep
+<<<<<<< HEAD
 from typing import Dict, Any, Optional, Union
 from .logging import logger
 from .browser_fingerprint import BrowserFingerprint
+=======
+from .logging import logger
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
 from DrissionPage import WebPage, ChromiumOptions
 
 
@@ -16,22 +20,30 @@ class WebOperator:
     所有需要使用 DrissionPage 的类都应该通过 WebOperator 来操作浏览器。
     """
     
+<<<<<<< HEAD
     def __init__(self, headless=False, fingerprint_config: Optional[Union[str, Dict[str, Any]]] = None):
+=======
+    def __init__(self, headless=False):
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
         """
         初始化网页操作器
         
         Args:
             headless: 是否使用无头模式
+<<<<<<< HEAD
             fingerprint_config: 浏览器指纹配置
                 - None: 不使用指纹修改
                 - str: 使用预设指纹名称（如 'windows_chrome', 'mac_chrome'）
                 - Dict: 使用自定义指纹配置
+=======
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
         """
         # 创建浏览器配置
         co = ChromiumOptions()
         if headless:
             co.headless()
         
+<<<<<<< HEAD
         # 处理指纹配置
         self.fingerprint = None
         self.injection_script = None
@@ -68,6 +80,11 @@ class WebOperator:
         if self.injection_script:
             self._inject_fingerprint_script_on_new_document()
             logger.success("指纹脚本已配置为在所有新页面加载前自动注入")
+=======
+        # 创建 WebPage 实例（WebOperator 完全拥有和管理）
+        self.page = WebPage(chromium_options=co)
+        logger.info("WebOperator 已创建浏览器实例")
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
     
     def close(self):
         """关闭浏览器"""
@@ -78,6 +95,7 @@ class WebOperator:
             except Exception as e:
                 logger.error(f"关闭浏览器失败: {e}")
     
+<<<<<<< HEAD
     def _inject_fingerprint_script_on_new_document(self):
         """
         使用 CDP 在新页面加载前注入指纹脚本
@@ -136,6 +154,8 @@ class WebOperator:
             logger.error(f"❌ 指纹验证失败: {e}")
             return {}
     
+=======
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
     # ========== 页面导航方法 ==========
     
     def navigate(self, url, wait_time=3):
@@ -153,9 +173,12 @@ class WebOperator:
             logger.info(f"正在加载页面: {url}")
             self.page.get(url)
             
+<<<<<<< HEAD
             # 注意：指纹脚本已经通过 CDP 在页面加载前自动注入了
             # 不需要在这里手动注入
             
+=======
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
             if wait_time > 0:
                 sleep(wait_time)
             
@@ -415,7 +438,11 @@ class WebOperator:
         try:
             element = self.page.ele(selector, timeout=timeout)
             return element is not None
+<<<<<<< HEAD
         except Exception:
+=======
+        except:
+>>>>>>> 94f3882969af946332f9bdde611d933efbec3e2a
             return False
     
     def scroll_to_element(self, selector):
