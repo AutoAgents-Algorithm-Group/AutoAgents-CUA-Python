@@ -92,11 +92,6 @@ cd AutoAgents-CUA-Python
 
 # 2. 安装依赖
 pip install -e .
-
-# 3. 设置环境变量
-export OPENAI_API_KEY="your-api-key"
-export OPENAI_BASE_URL="https://api.openai.com/v1"
-export OPENAI_MODEL="gpt-4o"
 ```
 
 ### 基本使用示例
