@@ -1,11 +1,11 @@
 """
-测试 WebOperator - 网页操作器
+测试 WebOperator - 网页操作器（SDK 模式）
 """
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_web.utils import WebOperator, logger
+from src.autoagents_cua.utils import WebOperator, logger
 
 
 def test_web_operator():
@@ -56,25 +56,21 @@ def test_web_operator():
 
 
 def test_web_operator_with_login_agent():
-    """演示 LoginAgent 如何使用 WebOperator"""
-    from src.autoagents_web.utils import LoginAgent, CaptchaAgent, ConfigLoader
+    """演示 LoginAgent 如何使用 WebOperator - SDK 模式"""
+    from src.autoagents_cua.utils import LoginAgent, CaptchaAgent
     
-    logger.info("=== 演示 LoginAgent 使用 WebOperator ===\n")
+    logger.info("=== 演示 LoginAgent 使用 WebOperator - SDK 模式 ===\n")
     
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
-    login_config = loader.get_login_agent_config()
-    
-    # 创建 CaptchaAgent
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
-    # 创建 LoginAgent（内部会自动创建 WebOperator）
+    # 创建 LoginAgent（直接传入配置，内部会自动创建 WebOperator）
     agent = LoginAgent(
-        url=login_config['url'],
+        url="https://www.reddit.com/login/",
         captcha_agent=captcha_agent,
         headless=False,
         wait_time=3

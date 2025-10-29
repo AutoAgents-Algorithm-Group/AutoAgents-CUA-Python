@@ -10,7 +10,6 @@ from langchain_core.callbacks import BaseCallbackHandler, CallbackManager
 from langgraph.checkpoint.memory import InMemorySaver
 from typing import Annotated, Any, Dict, List
 from langgraph.prebuilt import InjectedState
-from ..config_loader import get_autobrowser_agent_config
 import time
 from collections import defaultdict
 
@@ -111,12 +110,10 @@ class WebAgent:
         
         Args:
             headless: 是否使用无头模式
-            api_key: OpenAI API Key
-            base_url: API Base URL
+            api_key: OpenAI API Key（必需）
+            base_url: API Base URL（必需）
+            model: 模型名称（必需）
         """
-        # 获取配置
-        # config = get_autobrowser_agent_config()
-        
         # 创建 WebOperator
         self.operator = WebOperator(headless=headless)
         self.extractor = PageExtractor(self.operator.page)

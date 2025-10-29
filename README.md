@@ -18,10 +18,35 @@ Named after Mount Mikeno in the Virunga Mountains, one of the most challenging p
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Why Mikeno?](#why-mikeno)
+  - [Core Capabilities](#core-capabilities)
+    - [Intelligent Automation](#intelligent-automation)
+    - [High-Performance Architecture](#high-performance-architecture)
+    - [Developer Experience](#developer-experience)
+  - [What Can Mikeno Do?](#what-can-mikeno-do)
+  - [Technology Foundation](#technology-foundation)
 - [Quick Start](#quick-start)
+  - [Prerequisites](#prerequisites)
+  - [Automated Setup with setup.sh (Recommended)](#automated-setup-with-setupsh-recommended)
+  - [Manual Setup (Alternative)](#manual-setup-alternative)
+  - [Basic Usage Example (SDK Mode)](#basic-usage-example-sdk-mode)
 - [Deployment](#deployment)
+  - [Docker Deployment (Recommended)](#docker-deployment-recommended)
+  - [Environment Configuration](#environment-configuration)
+  - [Production Deployment](#production-deployment)
+  - [Troubleshooting](#troubleshooting)
+- [Project Structure](#project-structure)
+- [Core Components](#core-components)
+  - [LoginAgent](#loginagent)
+  - [CaptchaAgent](#captchaagent)
+  - [WebOperator](#weboperator)
+  - [PageExtractor](#pageextractor)
+  - [ShadowDOMParser](#shadowdomparser)
+- [Performance Metrics](#performance-metrics)
 - [Contributing](#contributing)
+  - [Development Guidelines](#development-guidelines)
+- [Security Notice](#security-notice)
 - [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ## Why Mikeno?
 
@@ -109,33 +134,33 @@ cp config.yaml.example config.yaml
 python playground/test_login_agent.py
 ```
 
-### Basic Usage Example
+### Basic Usage Example (SDK Mode)
 
 ```python
-from backend.src.utils import LoginAgent, CaptchaAgent, ConfigLoader
+from src.autoagents_cua.utils import LoginAgent, CaptchaAgent
 
-# Load configuration
-loader = ConfigLoader()
-captcha_config = loader.get_captcha_agent_config()
-login_config = loader.get_login_agent_config()
-
-# Initialize agents
+# Initialize CaptchaAgent (pass config directly)
 captcha_agent = CaptchaAgent(
-    api_key=captcha_config['api_key'],
-    base_url=captcha_config['base_url'],
-    model=captcha_config['model']
+    api_key="your-api-key",
+    base_url="https://api.openai.com/v1",
+    model="gpt-4o"
 )
 
+# Initialize LoginAgent (pass config directly)
 login_agent = LoginAgent(
-    url=login_config['url'],
+    url="https://example.com/login",
     captcha_agent=captcha_agent,
-    headless=False
+    headless=False,
+    wait_time=3
 )
 
 # Execute automated login
 success = login_agent.login(
     username='your_username',
     password='your_password',
+    username_selector='xpath://input[@name="username"]',
+    password_selector='xpath://input[@name="password"]',
+    button_selector='xpath://button[@type="submit"]',
     auto_handle_captcha=True
 )
 
@@ -144,6 +169,8 @@ if success:
     
 login_agent.close()
 ```
+
+For more examples, see [SDK_USAGE.md](SDK_USAGE.md).
 
 ## Deployment
 

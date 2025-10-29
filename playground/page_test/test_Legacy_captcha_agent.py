@@ -3,12 +3,12 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from DrissionPage import WebPage
-from src.autoagents_cua.utils import CaptchaAgent, ConfigLoader, logger
+from src.autoagents_cua.utils import CaptchaAgent, logger
 from time import sleep
 
 
 class GoogleReCaptchaHandler:
-    """Google reCAPTCHA 处理器 - 使用传参方式"""
+    """Google reCAPTCHA 处理器 - SDK 模式：直接传参"""
     
     def fill_form(self, page, config):
         """填写表单"""
@@ -52,14 +52,10 @@ class GoogleReCaptchaHandler:
             return False
 
 def main():
-    """主函数"""
+    """主函数 - SDK 模式：直接传入配置"""
     logger.info("="*80)
-    logger.info("Google reCAPTCHA v2 自动化测试")
+    logger.info("Google reCAPTCHA v2 自动化测试 - SDK 模式")
     logger.info("="*80)
-    
-    # 加载配置
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
     
     # Google reCAPTCHA 测试配置
     recaptcha_config = {
@@ -69,11 +65,11 @@ def main():
         'max_retries': 5
     }
     
-    # 创建 CaptchaAgent
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
     # 创建浏览器页面

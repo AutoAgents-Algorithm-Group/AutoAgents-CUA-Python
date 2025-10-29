@@ -18,10 +18,35 @@
 ## 目录
 - [目录](#目录)
 - [为什么选择 Mikeno？](#为什么选择-mikeno)
+  - [核心能力](#核心能力)
+    - [智能自动化](#智能自动化)
+    - [高性能架构](#高性能架构)
+    - [开发者体验](#开发者体验)
+  - [Mikeno 能做什么？](#mikeno-能做什么)
+  - [技术基础](#技术基础)
 - [快速开始](#快速开始)
+  - [前提条件](#前提条件)
+  - [使用 setup.sh 自动安装（推荐）](#使用-setupsh-自动安装推荐)
+  - [手动安装（备选方案）](#手动安装备选方案)
+  - [基本使用示例（SDK 模式）](#基本使用示例sdk-模式)
 - [部署](#部署)
+  - [Docker 部署（推荐）](#docker-部署推荐)
+  - [环境配置](#环境配置)
+  - [生产部署](#生产部署)
+  - [故障排除](#故障排除)
+- [项目结构](#项目结构)
+- [核心组件](#核心组件)
+  - [LoginAgent](#loginagent)
+  - [CaptchaAgent](#captchaagent)
+  - [WebOperator](#weboperator)
+  - [PageExtractor](#pageextractor)
+  - [ShadowDOMParser](#shadowdomparser)
+- [性能指标](#性能指标)
 - [贡献](#贡献)
+  - [开发指南](#开发指南)
+- [安全提示](#安全提示)
 - [许可证](#许可证)
+- [致谢](#致谢)
 
 ## 为什么选择 Mikeno？
 
@@ -109,33 +134,33 @@ cp config.yaml.example config.yaml
 python playground/test_login_agent.py
 ```
 
-### 基本使用示例
+### 基本使用示例（SDK 模式）
 
 ```python
-from backend.src.utils import LoginAgent, CaptchaAgent, ConfigLoader
+from src.autoagents_cua.utils import LoginAgent, CaptchaAgent
 
-# 加载配置
-loader = ConfigLoader()
-captcha_config = loader.get_captcha_agent_config()
-login_config = loader.get_login_agent_config()
-
-# 初始化代理
+# 初始化 CaptchaAgent（直接传入配置）
 captcha_agent = CaptchaAgent(
-    api_key=captcha_config['api_key'],
-    base_url=captcha_config['base_url'],
-    model=captcha_config['model']
+    api_key="your-api-key",
+    base_url="https://api.openai.com/v1",
+    model="gpt-4o"
 )
 
+# 初始化 LoginAgent（直接传入配置）
 login_agent = LoginAgent(
-    url=login_config['url'],
+    url="https://example.com/login",
     captcha_agent=captcha_agent,
-    headless=False
+    headless=False,
+    wait_time=3
 )
 
 # 执行自动登录
 success = login_agent.login(
     username='your_username',
     password='your_password',
+    username_selector='xpath://input[@name="username"]',
+    password_selector='xpath://input[@name="password"]',
+    button_selector='xpath://button[@type="submit"]',
     auto_handle_captcha=True
 )
 
@@ -144,6 +169,8 @@ if success:
     
 login_agent.close()
 ```
+
+更多示例请查看 [SDK_USAGE.md](SDK_USAGE.md)
 
 ## 部署
 

@@ -2,40 +2,40 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_cua.utils import LoginAgent, CaptchaAgent, ConfigLoader, logger
+from src.autoagents_cua.utils import LoginAgent, CaptchaAgent, logger
 
 
 def main():
+    """
+    LoginAgent 使用示例 - SDK 模式
     
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
-    login_config = loader.get_login_agent_config()
+    在实例化时直接传入配置参数，不需要配置文件
+    """
     
-    # 创建 CaptchaAgent（从配置文件读取）
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
-    # 创建 LoginAgent（从配置文件读取）
+    # 创建 LoginAgent（直接传入配置）
     agent = LoginAgent(
-        url=login_config['url'],
+        url="https://www.reddit.com/login/",
         captcha_agent=captcha_agent,
-        headless=login_config['headless'],
-        wait_time=login_config['wait_time']
+        headless=False,
+        wait_time=3
     )
     
-
     # 方式1：直接调用 login()，内部自动加载页面（推荐）
     # login() 方法现在会自动调用 web_operator.navigate() 来加载页面
     success = agent.login(
-        username=login_config['username'],
-        password=login_config['password'],
-        username_selector=login_config['username_selector'],
-        password_selector=login_config['password_selector'],
-        button_selector=login_config['button_selector'],
-        auto_handle_captcha=login_config['auto_handle_captcha']
+        username="agentspro0bot",
+        password="ubi2future",
+        username_selector='xpath://input[@name="username"]',
+        password_selector='xpath://input[@name="password"]',
+        button_selector='xpath://button[contains(@class, "login")]',
+        auto_handle_captcha=True
     )
     
     # 方式2：如果需要手动控制页面加载，可以：

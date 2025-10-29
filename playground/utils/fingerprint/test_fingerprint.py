@@ -8,12 +8,13 @@ import os
 # 添加项目根目录到路径
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.utils import (
+from src.autoagents_cua.utils import (
     WebOperator, 
-    BrowserFingerprint, 
-    FingerprintPool,
-    ConfigLoader,
     logger
+)
+from src.autoagents_cua.utils.browser_fingerprint import (
+    BrowserFingerprint,
+    FingerprintPool
 )
 
 
@@ -92,22 +93,17 @@ def test_random_fingerprint():
 
 
 def test_config_fingerprint():
-    """测试从配置文件加载指纹"""
+    """测试自定义指纹配置 - SDK 模式"""
     logger.info("=" * 60)
-    logger.info("测试 3: 从配置文件加载指纹")
+    logger.info("测试 3: 使用自定义指纹配置（SDK 模式）")
     logger.info("=" * 60)
     
-    # 从配置文件加载
-    config = ConfigLoader()
-    fingerprint_config = config.get_browser_fingerprint_config()
+    # 自定义指纹配置（直接传入字典）
+    fingerprint_config = BrowserFingerprint.get_preset('windows_chrome')
     
-    if fingerprint_config is None:
-        logger.warning("配置文件中未启用指纹功能")
-        return
+    logger.info(f"使用指纹配置: {fingerprint_config.get('name')}")
     
-    logger.info(f"从配置加载的指纹类型: {type(fingerprint_config).__name__}")
-    
-    # 使用配置文件中的指纹
+    # 使用自定义指纹
     web = WebOperator(headless=False, fingerprint_config=fingerprint_config)
     
     # 访问检测网站
@@ -195,14 +191,14 @@ def test_all_presets():
 
 
 def main():
-    """主测试函数"""
-    logger.info("🎭 浏览器指纹修改功能测试")
+    """主测试函数 - SDK 模式"""
+    logger.info("🎭 浏览器指纹修改功能测试 - SDK 模式")
     logger.info("=" * 60)
     
     tests = {
         '1': ('测试预设指纹 (Windows Chrome)', test_preset_fingerprint),
         '2': ('测试随机指纹生成', test_random_fingerprint),
-        '3': ('测试从配置文件加载', test_config_fingerprint),
+        '3': ('测试自定义指纹配置', test_config_fingerprint),
         '4': ('测试指纹池', test_fingerprint_pool),
         '5': ('对比测试（无指纹 vs 有指纹）', test_comparison),
         '6': ('测试所有预设指纹', test_all_presets),

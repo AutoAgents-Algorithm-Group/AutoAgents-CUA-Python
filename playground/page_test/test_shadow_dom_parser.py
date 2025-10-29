@@ -2,31 +2,31 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_web.utils import logger, ConfigLoader, LoginAgent, CaptchaAgent
+from src.autoagents_cua.utils import logger, LoginAgent, CaptchaAgent
 from time import time
 
 
-
 def main():
+    """
+    Shadow DOM 解析器测试 - SDK 模式
+    
+    在实例化时直接传入配置参数
+    """
     start_time = time()
 
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
-    login_config = loader.get_login_agent_config()
-    
-    # 创建 CaptchaAgent
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
-    # 创建 LoginAgent
+    # 创建 LoginAgent（直接传入配置）
     agent = LoginAgent(
-        url=login_config['url'],
+        url="https://www.reddit.com/login/",
         captcha_agent=captcha_agent,
-        headless=login_config['headless'],
-        wait_time=login_config['wait_time']
+        headless=False,
+        wait_time=3
     )
     
     try:
@@ -37,13 +37,13 @@ def main():
         agent.shadow_parser.input_text(
             host_selector='css:faceplate-text-input#login-username',
             element_selector='css:input[name="username"]',
-            text=login_config['username']
+            text="agentspro0bot"
         )
         
         agent.shadow_parser.input_text(
             host_selector='css:faceplate-text-input#login-password',
             element_selector='css:input[name="password"]',
-            text=login_config['password']
+            text="ubi2future"
         )
         
         # 使用 web_operator 点击登录按钮（XPath 定位）

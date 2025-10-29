@@ -5,6 +5,8 @@ Web 操作 Agent - 基于自然语言的网页自动化
 - 支持自然语言指令（如"请帮我打开谷歌"）
 - 自动执行网页操作（导航、点击、输入等）
 - 智能识别页面元素
+
+SDK 模式示例：实例化时直接传入配置参数
 """
 import os
 import sys
@@ -305,11 +307,16 @@ from dotenv import load_dotenv
 
 
 def simple_demo():
-    """演示示例"""
+    """演示示例 - SDK 模式：直接传入配置参数"""
     logger.info("🚀 Web Agent 演示启动")
     
-    # 创建 Agent
-    agent = WebAgent(headless=False, api_key=os.getenv("OPENAI_API_KEY"), base_url=os.getenv("OPENAI_BASE_URL"), model="gemini-2.5-pro")
+    # 创建 Agent（直接传入配置参数，或从环境变量读取）
+    agent = WebAgent(
+        headless=False, 
+        api_key=os.getenv("OPENAI_API_KEY") or "sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha", 
+        base_url=os.getenv("OPENAI_BASE_URL") or "https://api.tu-zi.com/v1", 
+        model="gemini-2.5-pro"
+    )
     
     try:
         # 示例1: 打开网站

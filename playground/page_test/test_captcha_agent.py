@@ -1,12 +1,14 @@
 """
 测试 CaptchaAgent - 验证码代理（包含完整的 solve_captcha 流程）
+
+SDK 模式示例：直接传入配置参数，不需要配置文件
 """
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from DrissionPage import WebPage
-from src.autoagents_cua.utils import CaptchaAgent, ConfigLoader, logger
+from src.autoagents_cua.utils import CaptchaAgent, logger
 
 
 def test_captcha_agent_full_flow():
@@ -20,15 +22,11 @@ def test_captcha_agent_full_flow():
     4. solve_captcha() - 完整的验证码处理流程（NEW！）
     """
     
-    # 加载配置
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
-    
-    # 创建 CaptchaAgent
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
     # 创建页面对象
@@ -81,25 +79,21 @@ def test_captcha_agent_full_flow():
 
 
 def test_captcha_agent_with_login():
-    """演示在 LoginAgent 中使用 CaptchaAgent"""
-    from src.autoagents_web.utils import LoginAgent
+    """演示在 LoginAgent 中使用 CaptchaAgent - SDK 模式"""
+    from src.autoagents_cua.utils import LoginAgent
     
     logger.info("=== 演示 LoginAgent 使用 CaptchaAgent ===\n")
     
-    loader = ConfigLoader()
-    captcha_config = loader.get_captcha_agent_config()
-    login_config = loader.get_login_agent_config()
-    
-    # 创建 CaptchaAgent
+    # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key=captcha_config['api_key'],
-        base_url=captcha_config['base_url'],
-        model=captcha_config['model']
+        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
+        base_url="https://api.tu-zi.com/v1",
+        model="gemini-2.5-pro"
     )
     
-    # 创建 LoginAgent（传入 captcha_agent）
+    # 创建 LoginAgent（直接传入配置）
     agent = LoginAgent(
-        url=login_config['url'],
+        url="https://www.reddit.com/login/",
         captcha_agent=captcha_agent,
         headless=False,
         wait_time=3
@@ -110,8 +104,8 @@ def test_captcha_agent_with_login():
         
         # LoginAgent 会自动调用 captcha_agent.solve_captcha()
         success = agent.login(
-            username=login_config['username'],
-            password=login_config['password'],
+            username="agentspro0bot",
+            password="ubi2future",
             auto_handle_captcha=True  # 内部会调用 captcha_agent.solve_captcha(page)
         )
         
