@@ -1,21 +1,12 @@
-"""
-PubMed Central 论文爬取演示
-任务：
-1. 打开 PubMed Central 网站
-2. 搜索 "characterization of solid superlubrication"
-3. 点击第一个搜索结果，爬取标题、作者、摘要
-4. 返回搜索结果页
-5. 点击第二个搜索结果，重复步骤3
-"""
+from time import sleep
 import os
 import sys
-from time import sleep
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_web.utils.web_operator import WebOperator
-from src.autoagents_web.utils.page_extractor import PageExtractor
-from src.autoagents_web.utils.logging import logger
+
+from src.autoagents_cua.browser import WebOperator
+from src.autoagents_cua.browser import PageExtractor
+from src.autoagents_cua.utils.logging import logger
 
 
 class PubMedCrawler:

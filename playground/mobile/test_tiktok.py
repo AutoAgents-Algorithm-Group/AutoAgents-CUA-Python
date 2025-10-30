@@ -1,21 +1,15 @@
-#!/usr/bin/env python3
-"""
-TikTok 循环操作测试文件
-多轮循环操作：点击头像 -> 点击私信 -> 返回 -> 返回 -> 向下滚轮
-"""
-
+import os
 import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import signal
 
-# 添加项目根目录到Python路径
-sys.path.insert(0, '/Users/forhheart/AIGC/AutoAgents-CUA-Python/src')
-
-from autoagents_cua.prebuilt.tiktok_manager import TikTokManager
+from src.autoagents_cua.prebuilt import TikTokManager
+from src.autoagents_cua.utils import logger
 
 
 def signal_handler(sig, frame):
     """处理Ctrl+C信号"""
-    print('\n⏹️  接收到中断信号，正在停止...')
+    logger.info('\n⏹️  接收到中断信号，正在停止...')
     sys.exit(0)
 
 

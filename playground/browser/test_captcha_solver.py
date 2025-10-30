@@ -1,8 +1,3 @@
-"""
-测试 CaptchaAgent - 验证码代理（包含完整的 solve_captcha 流程）
-
-SDK 模式示例：直接传入配置参数，不需要配置文件
-"""
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))

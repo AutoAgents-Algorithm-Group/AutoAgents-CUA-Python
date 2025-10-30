@@ -1,21 +1,11 @@
-"""
-浏览器指纹测试脚本 - 测试指纹修改功能
-"""
-
-import sys
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-# 添加项目根目录到路径
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
-from src.autoagents_cua.utils import (
-    WebOperator, 
-    logger
-)
-from src.autoagents_cua.browser import (
-    BrowserFingerprint,
-    FingerprintPool
-)
+from src.autoagents_cua.utils import logger
+from src.autoagents_cua.browser import WebOperator
+from src.autoagents_cua.browser import BrowserFingerprint
+from src.autoagents_cua.browser import FingerprintPool
 
 
 # 指纹检测网站

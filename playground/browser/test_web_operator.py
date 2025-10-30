@@ -1,6 +1,3 @@
-"""
-测试 WebOperator - 网页操作器（SDK 模式）
-"""
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))

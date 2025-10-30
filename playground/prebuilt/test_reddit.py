@@ -1,5 +1,7 @@
 import time
+import os
 import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from src.autoagents_cua.browser import WebOperator, ShadowDOMParser
 from src.autoagents_cua.utils.logging import logger

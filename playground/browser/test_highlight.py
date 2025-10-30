@@ -1,7 +1,10 @@
-from DrissionPage import ChromiumPage
 import time
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from DrissionPage._functions import elements
+from src.autoagents_cua.utils import logger
+from DrissionPage import ChromiumPage
 
 def label_interactive_elements(page):
     """
