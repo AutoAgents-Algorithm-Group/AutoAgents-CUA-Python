@@ -1,155 +1,325 @@
-# Mobile 端测试
+# Mobile 移动端自动化
 
-此目录包含针对移动设备的自动化测试脚本。
+本目录包含所有与移动端（Android）自动化相关的测试和示例。
 
-## 架构说明
+## 📁 文件结构
 
-### 基础层：MobileDevice (`src/autoagents_cua/agent/mobile_agent.py`)
-提供移动设备的基础操作封装，类似于 `Browser` 类对浏览器的封装。
-
-主要功能：
-- 设备连接和管理
-- 基础操作：点击、滑动、按键等
-- 元素查找和交互
-- 截图和界面检测
-
-使用示例：
-```python
-from autoagents_cua.agent.mobile_agent import MobileDevice
-
-# 连接设备
-device = MobileDevice("127.0.0.1:5555")
-
-# 启动应用
-device.start_app("com.example.app")
-
-# 点击元素
-device.click_element(text="按钮")
-
-# 滑动
-device.swipe_up(ratio=0.5)
+```
+mobile/
+└── test_tiktok.py              # TikTok 自动化测试
 ```
 
-### 应用层：TikTokManager (`src/autoagents_cua/prebuilt/tiktok_manager.py`)
-基于 `MobileDevice` 的高层封装，提供 TikTok 特定的自动化操作。
+## 🎯 功能概述
 
-主要功能：
-- TikTok 应用管理
-- 视频浏览和切换
-- 直播间检测和跳过
-- 用户交互（点赞、评论、私信等）
-- 循环操作自动化
+### TikTok 自动化管理器
+**文件**: `test_tiktok.py`
 
-使用示例：
+完整的 TikTok 应用自动化解决方案，支持：
+
+#### 核心功能
+- 📱 **设备连接**: 支持 USB 和 WiFi ADB 连接
+- 🚀 **应用管理**: 启动、停止、重启 TikTok
+- 🎯 **元素检测**: 智能识别头像、按钮等元素
+- 👆 **手势操作**: 点击、滑动、长按等
+- 🔄 **循环操作**: 自动化重复任务
+- 📊 **统计分析**: 操作成功率和耗时统计
+- ⚠️ **错误处理**: 自动重试和错误恢复
+
+#### 自动化循环
+```
+循环流程：
+1. 检测并点击头像
+2. 等待页面加载
+3. 点击私信按钮
+4. 返回到视频页
+5. 再次返回到首页
+6. 向上滑动切换视频
+```
+
+## 🚀 快速开始
+
+### 前置条件
+
+1. **安装 Android 调试工具**
+```bash
+# macOS
+brew install android-platform-tools
+
+# Ubuntu/Debian
+sudo apt-get install android-tools-adb
+
+# Windows
+# 从 https://developer.android.com/studio/releases/platform-tools 下载
+```
+
+2. **安装 Python 依赖**
+```bash
+pip install uiautomator2
+```
+
+3. **连接 Android 设备**
+```bash
+# USB 连接
+adb devices
+
+# WiFi 连接（需要先 USB 连接一次）
+adb tcpip 5555
+adb connect <设备IP>:5555
+```
+
+### 基础使用
+
+#### 1. 简单的 TikTok 操作
+
 ```python
-from autoagents_cua.prebuilt.tiktok_manager import TikTokManager
+from src.autoagents_cua.prebuilt import TikTokManager
 
 # 创建管理器
-manager = TikTokManager()
+manager = TikTokManager(device_address="127.0.0.1:5555")
 
-# 启动应用
+# 启动 TikTok
 manager.start_app()
 
-# 处理弹窗
+# 处理启动弹窗
 manager.handle_popups()
 
-# 滚动浏览视频
-manager.scroll_to_next_video(force_level="strong")
+# 执行单次循环
+manager.execute_single_cycle()
 
-# 运行循环操作
-manager.run_continuous_cycle(cycle_count=10)
+# 关闭应用
+manager.stop_app()
 ```
 
-## 测试文件
+#### 2. 连续自动化循环
 
-### test_cycle_operations.py
-测试 TikTok 的循环操作功能。
-
-**循环流程：**
-1. 检测是否为直播间（如果是则跳过）
-2. 点击创作者头像
-3. 点击私信按钮
-4. 第一次返回（聊天页面 → 个人主页）
-5. 第二次返回（个人主页 → 视频页面）
-6. 向下滚轮切换视频
-
-**使用方法：**
-```bash
-# 无限循环（按 Ctrl+C 停止）
-python test_cycle_operations.py
-
-# 指定循环次数
-python test_cycle_operations.py 10
-```
-
-**参数说明：**
-- `cycle_count`: 循环次数，不指定或 ≤ 0 表示无限循环
-- 程序会自动检测并跳过直播间
-- 连续3次失败后自动停止
-
-## 开发指南
-
-### 创建新的应用管理器
-
-如果要为其他应用创建管理器，建议按照以下步骤：
-
-1. **在 `src/autoagents_cua/prebuilt/` 创建新的管理器类**
-   ```python
-   from ..agent.mobile_agent import MobileDevice
-   
-   class MyAppManager:
-       def __init__(self, device_address: str = "127.0.0.1:5555"):
-           self.device = MobileDevice(device_address)
-       
-       # 实现应用特定的功能
-   ```
-
-2. **在 `src/autoagents_cua/prebuilt/__init__.py` 中导出**
-   ```python
-   from .my_app_manager import MyAppManager
-   __all__ = ['TikTokManager', 'MyAppManager']
-   ```
-
-3. **在 `playground/mobile/` 创建测试文件**
-   ```python
-   from autoagents_cua.prebuilt.my_app_manager import MyAppManager
-   # 编写测试代码
-   ```
-
-### 最佳实践
-
-1. **基础操作使用 MobileDevice**：所有通用的移动设备操作应该使用 `MobileDevice` 类
-2. **应用特定逻辑放在 prebuilt**：针对特定应用的高层逻辑放在 `prebuilt` 目录下的管理器中
-3. **测试文件放在 playground/mobile**：所有测试脚本放在 `playground/mobile/` 目录下
-4. **使用日志记录**：使用 `from ..utils.logging import logger` 进行日志记录
-5. **错误处理**：所有操作都应该有适当的错误处理和返回值检查
-
-## 设备要求
-
-- Android 设备或模拟器
-- 已安装 ADB（Android Debug Bridge）
-- 设备已开启 USB 调试
-- 已安装 uiautomator2：`pip install uiautomator2`
-
-## 常见问题
-
-**Q: 设备连接失败怎么办？**
-A: 确保：
-- ADB 服务已启动：`adb start-server`
-- 设备已连接：`adb devices`
-- 设备地址正确（默认：`127.0.0.1:5555`）
-
-**Q: 找不到元素怎么办？**
-A: 可以使用 `uiautomator2` 的调试工具：
 ```python
-# 打印当前页面的所有元素
-device.device.dump_hierarchy()
+from src.autoagents_cua.prebuilt import TikTokManager
 
-# 使用 weditor 可视化调试
-# pip install weditor
-# weditor
+manager = TikTokManager()
+
+# 启动并准备
+manager.start_app()
+manager.handle_popups()
+
+# 运行 10 个循环
+stats = manager.run_continuous_cycle(
+    cycle_count=10,      # 循环次数
+    max_errors=3,        # 最大连续错误数
+    delay_range=(2, 5)   # 操作间隔（秒）
+)
+
+# 查看统计
+manager.print_cycle_stats(stats)
 ```
 
-**Q: 如何调整操作速度？**
-A: 在操作之间添加 `time.sleep()` 来调整等待时间，或修改滑动的 `duration` 参数。
+#### 3. 高级配置
+
+```python
+from src.autoagents_cua.prebuilt import TikTokManager
+from src.autoagents_cua.agent import MobileDevice
+
+# 自定义设备配置
+device = MobileDevice(device_address="192.168.1.100:5555")
+
+# 创建 TikTok 管理器
+manager = TikTokManager(device_address="192.168.1.100:5555")
+
+# 自定义操作参数
+manager.execute_single_cycle(
+    avatar_wait=3.0,      # 点击头像后等待时间
+    message_wait=2.0,     # 点击私信后等待时间
+    back_wait=1.5,        # 返回后等待时间
+    swipe_ratio=0.5       # 滑动距离比例
+)
+```
+
+## 🔧 核心类说明
+
+### MobileDevice
+**位置**: `src/autoagents_cua/agent/mobile_agent.py`
+
+移动设备基础操作类：
+
+```python
+from src.autoagents_cua.agent import MobileDevice
+
+device = MobileDevice("127.0.0.1:5555")
+
+# 基础操作
+device.start_app("com.zhiliaoapp.musically")
+device.click_element(text="按钮")
+device.swipe_up(ratio=0.5)
+device.press_back()
+device.screenshot(save_path="screen.png")
+
+# 获取设备信息
+info = device.get_screen_info()
+print(f"屏幕尺寸: {info['width']}x{info['height']}")
+```
+
+### TikTokManager
+**位置**: `src/autoagents_cua/prebuilt/tiktok_manager.py`
+
+TikTok 专用自动化管理器，继承自 `MobileAgent`。
+
+#### 主要方法
+
+| 方法 | 说明 | 参数 |
+|------|------|------|
+| `start_app()` | 启动 TikTok | - |
+| `stop_app()` | 停止 TikTok | - |
+| `handle_popups()` | 处理弹窗 | `max_attempts=3` |
+| `detect_avatar()` | 检测头像 | `timeout=5` |
+| `execute_single_cycle()` | 执行单次循环 | 多个等待参数 |
+| `run_continuous_cycle()` | 连续循环 | `cycle_count`, `max_errors` |
+
+## 📊 统计信息
+
+运行循环后可获得详细统计：
+
+```python
+stats = manager.run_continuous_cycle(cycle_count=10)
+
+# 统计信息包含：
+print(f"总循环数: {stats['total_cycles']}")
+print(f"成功: {stats['successful_cycles']}")
+print(f"失败: {stats['failed_cycles']}")
+print(f"成功率: {stats['success_rate']:.2%}")
+print(f"总耗时: {stats['total_time']:.2f}秒")
+print(f"平均耗时: {stats['average_time']:.2f}秒/次")
+```
+
+## 🎯 实际应用场景
+
+### 1. 数据收集
+- 自动浏览视频收集用户反馈
+- 统计特定话题的参与度
+- 分析推荐算法模式
+
+### 2. 账号运营
+- 自动点赞和评论（需扩展）
+- 批量关注/取关
+- 定时发布内容
+
+### 3. 测试自动化
+- UI 测试
+- 性能测试
+- 稳定性测试
+
+## ⚠️ 注意事项
+
+### 设备要求
+- ✅ Android 5.0 及以上
+- ✅ 已启用开发者模式和 USB 调试
+- ✅ 已安装 TikTok 应用
+
+### 性能优化
+```python
+# 减少等待时间提高速度
+manager.execute_single_cycle(
+    avatar_wait=1.0,
+    message_wait=1.0,
+    back_wait=0.5
+)
+
+# 增加等待时间提高稳定性
+manager.execute_single_cycle(
+    avatar_wait=5.0,
+    message_wait=3.0,
+    back_wait=2.0
+)
+```
+
+### 错误处理
+```python
+import signal
+import sys
+
+def signal_handler(sig, frame):
+    """优雅退出"""
+    print("\n⚠️ 检测到中断信号，正在停止...")
+    manager.stop_app()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+
+try:
+    manager.run_continuous_cycle(cycle_count=100)
+except Exception as e:
+    print(f"❌ 发生错误: {e}")
+finally:
+    manager.stop_app()
+```
+
+## 🔍 调试技巧
+
+### 1. 截图调试
+```python
+# 在关键步骤截图
+manager.device.screenshot(save_path="debug_1.png")
+manager.detect_avatar()
+manager.device.screenshot(save_path="debug_2.png")
+```
+
+### 2. 查看 UI 层次
+```bash
+# 使用 uiautomator2 自带工具
+python -m uiautomator2 init
+# 访问 http://localhost:7912 查看实时界面
+```
+
+### 3. 日志分析
+```python
+from src.autoagents_cua.utils.logging import logger
+
+# 详细日志会自动输出到控制台
+# 查看特定阶段的日志
+logger.debug("调试信息")
+logger.info("普通信息")
+logger.warning("警告信息")
+logger.error("错误信息")
+```
+
+## 📝 自定义扩展
+
+### 创建自定义移动端管理器
+
+```python
+from src.autoagents_cua.agent import MobileAgent
+
+class CustomAppManager(MobileAgent):
+    """自定义应用管理器"""
+    
+    APP_PACKAGE = "com.example.app"
+    
+    def __init__(self, device_address="127.0.0.1:5555"):
+        super().__init__(device_address)
+    
+    def start_app(self):
+        """启动应用"""
+        self.device.start_app(self.APP_PACKAGE)
+    
+    def custom_operation(self):
+        """自定义操作"""
+        # 实现你的逻辑
+        self.device.click_element(text="按钮")
+        self.device.swipe_up()
+```
+
+## 📚 相关文档
+
+- [MobileDevice API 文档](../../src/autoagents_cua/agent/mobile_agent.py)
+- [TikTokManager 源码](../../src/autoagents_cua/prebuilt/tiktok_manager.py)
+- [uiautomator2 官方文档](https://github.com/openatx/uiautomator2)
+- [ADB 命令参考](https://developer.android.com/studio/command-line/adb)
+
+## 🤝 贡献
+
+欢迎提交针对其他应用的自动化方案！
+
+支持的应用类型：
+- 社交媒体（微博、小红书、Instagram）
+- 电商平台（淘宝、京东、Amazon）
+- 内容平台（抖音、快手、YouTube）
+- 通讯工具（微信、WhatsApp、Telegram）
 

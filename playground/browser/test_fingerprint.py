@@ -12,7 +12,7 @@ from src.autoagents_cua.utils import (
     WebOperator, 
     logger
 )
-from src.autoagents_cua.utils.browser_fingerprint import (
+from src.autoagents_cua.browser import (
     BrowserFingerprint,
     FingerprintPool
 )

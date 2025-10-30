@@ -140,36 +140,3 @@ count = label_interactive_elements(p)
 print(f"✅ 已标记 内容\n {count} ")
 print("\n⏰ 标签将显示 10 秒...")
 time.sleep(10)
-
-
-
-# # 标记可交互元素
-# print("\n🎯 标记页面上的可交互元素...")
-# count = label_interactive_elements(p)
-# print(f"✅ 已标记 {count} 个可交互元素")
-
-# # 保持显示
-# print("\n⏰ 标签将显示 10 秒...")
-# time.sleep(10)
-
-# # 清除标签
-# print("\n🧹 清除标签...")
-# clear_labels(p)
-# print("✅ 完成！")
-
-# # 再测试一次别的页面
-# print("\n" + "="*50)
-# print("🌐 正在打开 GitHub...")
-# p.get('https://github.com')
-# time.sleep(2)
-
-# print("\n🎯 标记 GitHub 页面元素...")
-# count = label_interactive_elements(p)
-# print(f"✅ 已标记 {count} 个可交互元素")
-
-# print("\n⏰ 标签将显示 10 秒...")
-# time.sleep(10)
-
-# print("\n🧹 清除标签...")
-# clear_labels(p)
-# print("✅ 全部完成！")

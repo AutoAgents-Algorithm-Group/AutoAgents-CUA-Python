@@ -8,7 +8,8 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from DrissionPage import WebPage
-from src.autoagents_cua.utils import CaptchaAgent, logger
+from src.autoagents_cua.browser import CaptchaAgent
+from src.autoagents_cua.utils import logger
 
 
 def test_captcha_agent_full_flow():

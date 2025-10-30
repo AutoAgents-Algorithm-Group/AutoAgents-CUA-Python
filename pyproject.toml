@@ -1,6 +1,6 @@
 [project]
 name = "autoagents-cua"
-version = "0.0.6"
+version = "0.0.7"
 description = "SDK for interacting with AutoAgents.ai API"
 readme = "README.md"
 authors = [

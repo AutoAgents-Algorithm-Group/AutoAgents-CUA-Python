@@ -1,11 +1,9 @@
 import time
 import sys
-sys.path.insert(0, '/Users/forhheart/AIGC/DrrisonPage')
 
-from src.autoagents_web.utils.web_operator import WebOperator
-from src.autoagents_web.utils.shadow_dom_parser import ShadowDOMParser
-from src.autoagents_web.utils.logging import logger
-from src.autoagents_web.models.stage import Stage
+from src.autoagents_cua.browser import WebOperator, ShadowDOMParser
+from src.autoagents_cua.utils.logging import logger
+from src.autoagents_cua.models import Stage
 
 # ============= AI 相关代码（已注释） =============
 import openai

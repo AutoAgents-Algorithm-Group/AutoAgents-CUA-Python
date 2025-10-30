@@ -5,7 +5,8 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from src.autoagents_cua.utils import WebOperator, logger
+from src.autoagents_cua.browser import WebOperator
+from src.autoagents_cua.utils import logger
 
 
 def test_web_operator():
