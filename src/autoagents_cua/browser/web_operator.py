@@ -1,11 +1,9 @@
-"""
-网页操作器 - 提供通用的网页元素操作功能
-"""
-from time import sleep
-from typing import Dict, Any, Optional, Union
-from .logging import logger
-from .browser_fingerprint import BrowserFingerprint
+from ..utils.logging import logger
 from DrissionPage import WebPage, ChromiumOptions
+from typing import Optional, Any, Union, Dict
+from time import sleep
+from .browser_fingerprint import BrowserFingerprint
+
 
 
 class WebOperator:

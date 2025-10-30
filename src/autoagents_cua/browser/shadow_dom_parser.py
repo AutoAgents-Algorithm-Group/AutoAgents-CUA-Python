@@ -1,5 +1,6 @@
+from ..utils.logging import logger
 from time import sleep
-from .logging import logger
+
 
 
 class ShadowDOMParser:  

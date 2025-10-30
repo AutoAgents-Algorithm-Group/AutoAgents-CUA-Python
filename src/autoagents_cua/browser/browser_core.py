@@ -1,11 +1,8 @@
-"""
-Browser - 浏览器配置和管理类
-"""
-
-from typing import Optional, Dict, Any
-from ..utils.web_operator import WebOperator
-from ..utils.page_extractor import PageExtractor
 from ..utils.logging import logger
+from typing import Optional, Dict, Any
+from .web_operator import WebOperator
+from .page_extractor import PageExtractor
+
 
 
 class Browser:
@@ -92,4 +89,3 @@ class Browser:
     
     def __repr__(self):
         return f"Browser(headless={self.headless}, window_size={self.window_size})"
-

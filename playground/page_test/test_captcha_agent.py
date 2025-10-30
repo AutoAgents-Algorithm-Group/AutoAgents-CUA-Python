@@ -80,7 +80,7 @@ def test_captcha_agent_full_flow():
 
 def test_captcha_agent_with_login():
     """演示在 LoginAgent 中使用 CaptchaAgent - SDK 模式"""
-    from src.autoagents_cua.utils import LoginAgent
+    from src.autoagents_cua.prebuilt import LoginAgent
     
     logger.info("=== 演示 LoginAgent 使用 CaptchaAgent ===\n")
     

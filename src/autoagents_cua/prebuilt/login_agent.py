@@ -1,8 +1,12 @@
+"""
+Login Agent - 登录代理
+
+提供完整的登录和验证码处理功能，支持自动提取登录元素和处理验证码。
+"""
+
 from ..utils.logging import logger, set_stage
 from ..models import Stage
-from ..utils.page_extractor import PageExtractor
-from ..utils.shadow_dom_parser import ShadowDOMParser
-from ..utils.web_operator import WebOperator
+from ..browser import PageExtractor, ShadowDOMParser, WebOperator
 
 
 class LoginAgent:
@@ -114,5 +118,4 @@ class LoginAgent:
             log.error(f"登录失败: {e}")
             log.exception("登录异常详情")
             return False
-
 

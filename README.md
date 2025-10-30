@@ -19,7 +19,7 @@
 
 </div>
 
-AutoAgents-CUA-Python (Computer Use Agent) is an advanced AI-powered browser automation framework that combines Large Language Models with intelligent web automation capabilities. Built on DrissionPage and powered by state-of-the-art AI models, it transforms complex web automation tasks into simple, reliable operations.
+AutoAgents-CUA-Python (Computer Use Agent) is an advanced AI-powered automation framework that combines Large Language Models with intelligent browser and mobile automation capabilities. Built on DrissionPage and uiautomator2, it transforms complex automation tasks into simple, reliable operations.
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -30,15 +30,25 @@ AutoAgents-CUA-Python (Computer Use Agent) is an advanced AI-powered browser aut
     - [Developer Experience](#developer-experience)
   - [What Can AutoAgents CUA Do?](#what-can-autoagents-cua-do)
   - [Technology Foundation](#technology-foundation)
+- [Project Architecture](#project-architecture)
+  - [Module Structure](#module-structure)
+  - [Layered Design](#layered-design)
 - [Quick Start](#quick-start)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-  - [Basic Usage Example](#basic-usage-example)
+  - [Basic Usage Examples](#basic-usage-examples)
+    - [Browser Automation](#browser-automation)
+    - [Automated Login with CAPTCHA](#automated-login-with-captcha)
+    - [Mobile Automation (TikTok)](#mobile-automation-tiktok)
+- [Advanced Features](#advanced-features)
+  - [Browser Fingerprinting](#browser-fingerprinting)
+  - [CAPTCHA Solving](#captcha-solving)
+  - [Mobile Device Control](#mobile-device-control)
 - [Contributing](#contributing)
 
 ## Why AutoAgents CUA?
 
-AutoAgents CUA (Computer Use Agent) is an advanced browser automation platform that combines AI intelligence with robust web automation capabilities. Built on DrissionPage and powered by Large Language Models, AutoAgents CUA transforms complex web automation tasks into simple, natural language-driven operations.
+AutoAgents CUA (Computer Use Agent) is an advanced automation platform that combines AI intelligence with robust browser and mobile automation capabilities. Built on DrissionPage and uiautomator2, powered by Large Language Models, AutoAgents CUA transforms complex automation tasks into simple, natural language-driven operations.
 
 ### Core Capabilities
 
@@ -47,40 +57,110 @@ AutoAgents CUA (Computer Use Agent) is an advanced browser automation platform t
 - **Smart Form Detection**: Auto-detects and fills login forms without manual configuration
 - **Adaptive Retry Logic**: Intelligently retries failed operations with exponential backoff
 - **Natural Language Processing**: Describe what you want to automate in plain language
+- **Mobile App Automation**: Control Android apps with intelligent gesture recognition
 
 #### High-Performance Architecture
 - **10-50x Faster Element Extraction**: JavaScript-based batch extraction vs traditional methods
 - **Shadow DOM Support**: Full support for modern web components and Shadow DOM
 - **Optimized Network Usage**: Minimize browser-server communication overhead
 - **Production-Ready Logging**: Comprehensive stage-based logging for debugging and monitoring
+- **Modular Design**: Clean separation of concerns with independent, reusable modules
 
 #### Developer Experience
 - **Zero Configuration**: Get started immediately with sensible defaults
-- **YAML Configuration**: Flexible configuration management for complex scenarios
-- **Modular Design**: Use individual components or the complete automation suite
+- **Modular Architecture**: Use individual components or the complete automation suite
+- **Type Hints**: Full type annotation support for better IDE integration
 - **Extensive Examples**: Ready-to-use examples in the playground directory
+- **Backward Compatible**: Old import paths still work for smooth migration
 
 ### What Can AutoAgents CUA Do?
 
-- **Natural Language Automation**: Control browsers using natural language commands
-- **Automated Login**: Handle complex login flows including 2FA and CAPTCHAs
-- **Data Extraction**: Extract structured data from dynamic web pages
-- **Form Automation**: Fill and submit forms across multiple pages
-- **Session Management**: Maintain authenticated sessions across operations
-- **Workflow Automation**: Chain multiple operations into complex workflows
+**Web Automation:**
+- Natural language browser control using AI
+- Automated login with 2FA and CAPTCHA handling
+- Data extraction from dynamic web pages
+- Form automation across multiple pages
+- Session management and workflow automation
+
+**Mobile Automation:**
+- Android app control and automation
+- TikTok video interaction automation
+- Element detection and gesture simulation
+- Screenshot analysis and comparison
+
+**Prebuilt Solutions:**
+- LoginAgent for automatic web login
+- TikTokManager for TikTok automation
+- Extensible for custom applications
 
 ### Technology Foundation
 
 - **DrissionPage 4.0+**: Modern browser automation framework
+- **uiautomator2**: Android automation framework
 - **AI Models**: Advanced vision models for CAPTCHA recognition
 - **Python 3.11+**: Built on the latest Python features
 - **Loguru**: Professional-grade logging system
+
+## Project Architecture
+
+### Module Structure
+
+```
+autoagents_cua/
+├── browser/              # Browser automation core
+│   ├── Browser           # Browser management
+│   ├── WebOperator       # Web page operations
+│   ├── PageExtractor     # Element extraction
+│   ├── ShadowDOMParser   # Shadow DOM parsing
+│   ├── CaptchaAgent      # CAPTCHA solving
+│   └── BrowserFingerprint # Anti-detection fingerprinting
+│
+├── agent/                # Intelligent agents
+│   ├── BrowserAgent      # AI-powered browser agent
+│   ├── MobileDevice      # Mobile device control
+│   └── MobileAgent       # AI-powered mobile agent
+│
+├── prebuilt/             # Ready-to-use managers
+│   ├── LoginAgent        # Automated web login
+│   └── TikTokManager     # TikTok automation
+│
+├── client/               # LLM client
+│   └── ChatClient        # AI model integration
+│
+├── tools/                # Tool functions
+└── utils/                # Utilities
+```
+
+### Layered Design
+
+```
+┌─────────────────────────────────────────────────┐
+│         Prebuilt Layer (LoginAgent, TikTok)     │
+│              Ready-to-use Solutions             │
+└─────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────┐
+│      Agent Layer (BrowserAgent, MobileAgent)    │
+│           AI-Powered Intelligent Agents         │
+└─────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────┐
+│    Browser/Mobile Layer (Core Functionality)    │
+│     Browser Operations & Mobile Control         │
+└─────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────┐
+│         Utils Layer (Logging, Tools)            │
+│            Infrastructure & Utilities           │
+└─────────────────────────────────────────────────┘
+```
 
 ## Quick Start
 
 ### Prerequisites
 - Python 3.11+
-- Chrome Browser
+- Chrome Browser (for web automation)
+- Android Device/Emulator with ADB (for mobile automation)
 - Node.js 18+ (optional, for frontend features)
 
 ### Installation
@@ -94,14 +174,14 @@ cd AutoAgents-CUA-Python
 pip install -e .
 ```
 
-### Basic Usage Example
+### Basic Usage Examples
+
+#### Browser Automation
 
 ```python
+from autoagents_cua import Browser, BrowserAgent
 from autoagents_cua.client import ChatClient
 from autoagents_cua.models import ClientConfig, ModelConfig
-from autoagents_cua.computer import Browser
-from autoagents_cua.agent import BrowserAgent
-from autoagents_cua.tools import ALL_WEB_TOOLS
 
 # 1. Create LLM client
 llm = ChatClient(
@@ -115,18 +195,15 @@ llm = ChatClient(
     )
 )
 
-# 2. Create Browser
+# 2. Create Browser with fingerprinting
 browser = Browser(
     headless=False,
+    use_fingerprint=True,  # Anti-detection
     window_size={'width': 1000, 'height': 700}
 )
 
 # 3. Create BrowserAgent
-agent = BrowserAgent(
-    browser=browser,
-    llm=llm,
-    tools=ALL_WEB_TOOLS
-)
+agent = BrowserAgent(browser=browser, llm=llm)
 
 # 4. Execute tasks with natural language
 agent.invoke("Please open Google and search for 'Python automation'")
@@ -137,8 +214,116 @@ agent.invoke("Extract the main content from this page")
 agent.close()
 ```
 
-For more examples, see the `playground/` directory.
+#### Automated Login with CAPTCHA
 
+```python
+from autoagents_cua.prebuilt import LoginAgent
+from autoagents_cua.browser import CaptchaAgent
+
+# 1. Create CAPTCHA solver
+captcha_agent = CaptchaAgent(
+    api_key="your-api-key",
+    base_url="https://api.openai.com/v1",
+    model="gpt-4o"
+)
+
+# 2. Create LoginAgent
+login_agent = LoginAgent(
+    url="https://example.com/login",
+    captcha_agent=captcha_agent,
+    headless=False
+)
+
+# 3. Automatic login with CAPTCHA handling
+success = login_agent.login(
+    username="your-username",
+    password="your-password",
+    auto_handle_captcha=True  # Automatically solve CAPTCHAs
+)
+
+if success:
+    print("✅ Login successful!")
+```
+
+#### Mobile Automation (TikTok)
+
+```python
+from autoagents_cua.prebuilt import TikTokManager
+
+# 1. Create TikTok manager
+manager = TikTokManager(device_address="127.0.0.1:5555")
+
+# 2. Start app and handle popups
+manager.start_app()
+manager.handle_popups()
+
+# 3. Run automated cycle
+# Cycle: click avatar → message → back → back → scroll
+manager.run_continuous_cycle(
+    cycle_count=10,  # Run 10 cycles
+    max_errors=3     # Stop after 3 consecutive errors
+)
+
+# View statistics
+manager.print_cycle_stats(stats)
+```
+
+## Advanced Features
+
+### Browser Fingerprinting
+
+```python
+from autoagents_cua.browser import Browser, BrowserFingerprint
+
+# Generate random fingerprint
+fingerprint = BrowserFingerprint.generate_random_fingerprint()
+
+# Create browser with custom fingerprint
+browser = Browser(
+    headless=False,
+    use_fingerprint=True,
+    fingerprint_preset='windows_chrome'  # or custom fingerprint
+)
+```
+
+### CAPTCHA Solving
+
+```python
+from autoagents_cua.browser import CaptchaAgent
+
+# Create CAPTCHA agent
+agent = CaptchaAgent(
+    api_key="your-api-key",
+    model="gpt-4o"
+)
+
+# Solve CAPTCHA on a page
+success = agent.solve_captcha(
+    page=page,
+    captcha_selector='css:.captcha-container',
+    max_retries=3
+)
+```
+
+### Mobile Device Control
+
+```python
+from autoagents_cua.agent import MobileDevice
+
+# Connect to device
+device = MobileDevice("127.0.0.1:5555")
+
+# Basic operations
+device.start_app("com.example.app")
+device.click_element(text="Button")
+device.swipe_up(ratio=0.5)
+device.screenshot(save_path="screenshot.png")
+```
+
+For more examples, see the `playground/` directory:
+- `playground/agent/` - BrowserAgent examples
+- `playground/mobile/` - Mobile automation examples
+- `playground/page_test/` - Web automation examples
 
 ## Contributing
 
@@ -149,3 +334,7 @@ We welcome contributions from the community!
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

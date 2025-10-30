@@ -57,7 +57,8 @@ def test_web_operator():
 
 def test_web_operator_with_login_agent():
     """演示 LoginAgent 如何使用 WebOperator - SDK 模式"""
-    from src.autoagents_cua.utils import LoginAgent, CaptchaAgent
+    from src.autoagents_cua.prebuilt import LoginAgent
+    from src.autoagents_cua.utils import CaptchaAgent
     
     logger.info("=== 演示 LoginAgent 使用 WebOperator - SDK 模式 ===\n")
     

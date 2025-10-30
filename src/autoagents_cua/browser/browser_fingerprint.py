@@ -1,11 +1,8 @@
-"""
-浏览器指纹管理器 - 提供浏览器指纹生成、配置和应用功能
-"""
-
+from ..utils.logging import logger
+from typing import Dict, Any, Optional, List
 import random
 import json
-from typing import Dict, Any, Optional, List
-from .logging import logger
+
 
 
 class BrowserFingerprint:
@@ -879,4 +876,3 @@ class FingerprintPool:
     def size(self) -> int:
         """获取池大小"""
         return len(self.pool)
-

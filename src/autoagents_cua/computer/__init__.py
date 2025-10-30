@@ -1,8 +1,6 @@
-"""
-Computer 模块 - 计算机交互相关类
-"""
+from .desktop import Desktop
 
-from .browser import Browser
-
-__all__ = ['Browser']
+__all__ = [
+    'Desktop',
+]
 

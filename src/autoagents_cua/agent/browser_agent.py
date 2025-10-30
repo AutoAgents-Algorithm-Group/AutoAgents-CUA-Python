@@ -1,4 +1,4 @@
-from ..computer import Browser
+from ..browser import Browser
 from ..utils.logging import logger
 from ..tools import bind_tools_to_context, ALL_WEB_TOOLS
 from ..client import ChatClient
