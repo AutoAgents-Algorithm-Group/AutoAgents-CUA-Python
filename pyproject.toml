@@ -5,7 +5,8 @@ description = "SDK for interacting with AutoAgents.ai API"
 readme = "README.md"
 authors = [
     { name = "Hehua Fan", email = "forhheart5532@gmail.com" },
-    { name = "Haolan Yang", email = "returnzero486@gmail.com" }
+    { name = "Haolan Yang", email = "returnzero486@gmail.com" },
+    { name = "Guoyan Shi", email = "sohyan527@gmail.com" }
 ]
 requires-python = ">=3.11"
 dependencies = [

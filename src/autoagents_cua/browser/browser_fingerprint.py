@@ -39,7 +39,17 @@ class BrowserFingerprint:
             'device_memory': 16,
             'max_touch_points': 0,
             'canvas_noise': random.randint(0, 10),
-            'audio_noise': round(random.random() * 0.01, 6)
+            'audio_noise': round(random.random() * 0.01, 6),
+            'client_hints': {
+                'Sec-CH-UA': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+                'Sec-CH-UA-Mobile': '?0',
+                'Sec-CH-UA-Platform': '"Windows"',
+                'Sec-CH-UA-Platform-Version': '"15.0.0"',
+                'Sec-CH-UA-Arch': '"x86"',
+                'Sec-CH-UA-Bitness': '"64"',
+                'Sec-CH-UA-Model': '""',
+                'Sec-CH-UA-Full-Version': '"131.0.6778.86"'
+            }
         },
         
         'mac_chrome': {
@@ -62,7 +72,17 @@ class BrowserFingerprint:
             'device_memory': 8,
             'max_touch_points': 0,
             'canvas_noise': random.randint(0, 10),
-            'audio_noise': round(random.random() * 0.01, 6)
+            'audio_noise': round(random.random() * 0.01, 6),
+            'client_hints': {
+                'Sec-CH-UA': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+                'Sec-CH-UA-Mobile': '?0',
+                'Sec-CH-UA-Platform': '"macOS"',
+                'Sec-CH-UA-Platform-Version': '"15.7.0"',
+                'Sec-CH-UA-Arch': '"x86"',
+                'Sec-CH-UA-Bitness': '"64"',
+                'Sec-CH-UA-Model': '""',
+                'Sec-CH-UA-Full-Version': '"131.0.6778.86"'
+            }
         },
         
         'linux_chrome': {
@@ -85,7 +105,17 @@ class BrowserFingerprint:
             'device_memory': 8,
             'max_touch_points': 0,
             'canvas_noise': random.randint(0, 10),
-            'audio_noise': round(random.random() * 0.01, 6)
+            'audio_noise': round(random.random() * 0.01, 6),
+            'client_hints': {
+                'Sec-CH-UA': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+                'Sec-CH-UA-Mobile': '?0',
+                'Sec-CH-UA-Platform': '"Linux"',
+                'Sec-CH-UA-Platform-Version': '""',
+                'Sec-CH-UA-Arch': '"x86"',
+                'Sec-CH-UA-Bitness': '"64"',
+                'Sec-CH-UA-Model': '""',
+                'Sec-CH-UA-Full-Version': '"131.0.6778.86"'
+            }
         },
         
         'mac_safari': {
@@ -108,7 +138,17 @@ class BrowserFingerprint:
             'device_memory': 16,
             'max_touch_points': 0,
             'canvas_noise': random.randint(0, 10),
-            'audio_noise': round(random.random() * 0.01, 6)
+            'audio_noise': round(random.random() * 0.01, 6),
+            'client_hints': {
+                'Sec-CH-UA': '"Not_A Brand";v="99", "Safari";v="17", "Version";v="17.0"',
+                'Sec-CH-UA-Mobile': '?0',
+                'Sec-CH-UA-Platform': '"macOS"',
+                'Sec-CH-UA-Platform-Version': '"15.7.0"',
+                'Sec-CH-UA-Arch': '"arm"',
+                'Sec-CH-UA-Bitness': '"64"',
+                'Sec-CH-UA-Model': '""',
+                'Sec-CH-UA-Full-Version': '"17.0"'
+            }
         },
         
         'windows_edge': {
@@ -131,7 +171,17 @@ class BrowserFingerprint:
             'device_memory': 16,
             'max_touch_points': 0,
             'canvas_noise': random.randint(0, 10),
-            'audio_noise': round(random.random() * 0.01, 6)
+            'audio_noise': round(random.random() * 0.01, 6),
+            'client_hints': {
+                'Sec-CH-UA': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+                'Sec-CH-UA-Mobile': '?0',
+                'Sec-CH-UA-Platform': '"Windows"',
+                'Sec-CH-UA-Platform-Version': '"15.0.0"',
+                'Sec-CH-UA-Arch': '"x86"',
+                'Sec-CH-UA-Bitness': '"64"',
+                'Sec-CH-UA-Model': '""',
+                'Sec-CH-UA-Full-Version': '"131.0.2903.86"'
+            }
         }
     }
     
@@ -221,6 +271,26 @@ class BrowserFingerprint:
             
             # 随机内存（4, 8, 16, 32 GB）
             fingerprint['device_memory'] = random.choice([4, 8, 16, 32])
+            
+            # 随机生成Client Hints（基于平台）
+            if 'client_hints' in fingerprint:
+                client_hints = fingerprint['client_hints'].copy()
+                
+                # 根据平台调整架构
+                if fingerprint.get('platform') == 'MacIntel':
+                    client_hints['Sec-CH-UA-Arch'] = '"arm"' if random.choice([True, False]) else '"x86"'
+                else:
+                    client_hints['Sec-CH-UA-Arch'] = '"x86"'
+                
+                # 随机调整版本号
+                if 'Chrome' in client_hints.get('Sec-CH-UA', ''):
+                    version = random.randint(120, 131)
+                    patch = random.randint(0, 9999)
+                    build = random.randint(0, 99)
+                    client_hints['Sec-CH-UA'] = f'"Google Chrome";v="{version}", "Chromium";v="{version}", "Not_A Brand";v="24"'
+                    client_hints['Sec-CH-UA-Full-Version'] = f'"{version}.0.{patch}.{build}"'
+                
+                fingerprint['client_hints'] = client_hints
         
         logger.info(f"生成随机指纹: {fingerprint.get('name', '未命名')}")
         return fingerprint
@@ -325,7 +395,106 @@ class BrowserFingerprint:
             co.set_argument('--no-first-run')
             co.set_argument('--no-default-browser-check')
             
-            # 9. 自动端口配置（避免端口冲突）
+            # 9. Client Hints 配置 - 使用强制启动参数
+            client_hints = fingerprint.get('client_hints', {})
+            if client_hints:
+                logger.info(f"🔧 配置 Client Hints: {len(client_hints)} 个头部")
+                
+                # 方法1: 直接通过启动参数设置Client Hints
+                try:
+                    # 构建Client Hints相关的启动参数
+                    if 'Sec-CH-UA' in client_hints:
+                        ua_value = client_hints['Sec-CH-UA']
+                        co.set_argument(f'--force-ua-client-hints="{ua_value}"')
+                    
+                    if 'Sec-CH-UA-Platform' in client_hints:
+                        platform_value = client_hints['Sec-CH-UA-Platform'].replace('"', '')
+                        co.set_argument(f'--force-ua-platform="{platform_value}"')
+                    
+                    if 'Sec-CH-UA-Mobile' in client_hints:
+                        mobile_value = client_hints['Sec-CH-UA-Mobile']
+                        co.set_argument(f'--force-ua-mobile={mobile_value}')
+                    
+                    # 启用Client Hints功能
+                    co.set_argument('--enable-features=UserAgentClientHint,UserAgentClientHintFullVersionList,UserAgentClientHintFullVersion')
+                    co.set_argument('--disable-features=UserAgentReduction')
+                    
+                    logger.info("✅ 通过启动参数设置 Client Hints")
+                    
+                except Exception as e:
+                    logger.debug(f"启动参数方式失败: {e}")
+                
+                # 方法2: 通过环境变量设置
+                try:
+                    import os
+                    
+                    # 设置Chrome相关环境变量
+                    os.environ['CHROME_UA_BRANDS'] = client_hints.get('Sec-CH-UA', '')
+                    os.environ['CHROME_UA_PLATFORM'] = client_hints.get('Sec-CH-UA-Platform', '').replace('"', '')
+                    os.environ['CHROME_UA_MOBILE'] = client_hints.get('Sec-CH-UA-Mobile', '?0')
+                    
+                    logger.info("✅ 通过环境变量设置 Client Hints")
+                    
+                except Exception as e:
+                    logger.debug(f"环境变量方式失败: {e}")
+                
+                # 方法3: 强制设置用户代理字符串和相关参数
+                try:
+                    # 设置强制用户代理参数
+                    co.set_argument('--force-fieldtrials=UserAgentClientHint/Enabled')
+                    co.set_argument('--force-fieldtrial-params=UserAgentClientHint.Enabled:enabled/true')
+                    
+                    # 设置用户代理冻结相关参数
+                    co.set_argument('--disable-features=FreezeUserAgent')
+                    co.set_argument('--enable-features=UserAgentOverride')
+                    
+                    logger.info("✅ 设置强制字段试验参数")
+                    
+                except Exception as e:
+                    logger.debug(f"字段试验参数设置失败: {e}")
+                
+                # 方法4: 通过用户脚本目录设置
+                try:
+                    user_data_dir = getattr(co, 'user_data_path', None) or getattr(co, '_user_data_dir', None)
+                    if user_data_dir:
+                        import os
+                        import json
+                        
+                        # 确保用户数据目录存在
+                        os.makedirs(user_data_dir, exist_ok=True)
+                        default_dir = os.path.join(user_data_dir, 'Default')
+                        os.makedirs(default_dir, exist_ok=True)
+                        
+                        # 创建一个启动脚本来设置Client Hints
+                        startup_script = f"""
+                        // Client Hints 启动设置脚本
+                        const clientHints = {json.dumps(client_hints)};
+                        
+                        // 尝试在Chrome启动时设置Client Hints
+                        if (typeof chrome !== 'undefined' && chrome.runtime) {{
+                            chrome.runtime.onStartup.addListener(() => {{
+                                console.log('设置 Client Hints:', clientHints);
+                            }});
+                        }}
+                        """
+                        
+                        script_path = os.path.join(default_dir, 'client_hints_startup.js')
+                        with open(script_path, 'w', encoding='utf-8') as f:
+                            f.write(startup_script)
+                        
+                        logger.info("✅ 创建 Client Hints 启动脚本")
+                    
+                except Exception as e:
+                    logger.debug(f"启动脚本创建失败: {e}")
+                
+                # 输出最终配置信息
+                logger.info("Client Hints 配置详情:")
+                for key, value in client_hints.items():
+                    logger.info(f"  {key}: {value}")
+                    
+                logger.info("✅ Client Hints 多重配置完成")
+            
+            # 10. 自动端口配置（避免端口冲突）
             co.auto_port()
             logger.info("已启用自动端口管理")
             
@@ -355,6 +524,7 @@ class BrowserFingerprint:
         max_touch_points = fingerprint.get('max_touch_points', 0)
         languages = fingerprint.get('languages', ['en-US', 'en'])
         canvas_noise = fingerprint.get('canvas_noise', 0)
+        client_hints = fingerprint.get('client_hints', {})
         
         screen = fingerprint.get('screen', {})
         screen_width = screen.get('width', 1920)
@@ -367,6 +537,122 @@ class BrowserFingerprint:
 // ========== 浏览器指纹修改脚本 ==========
 (function() {{
     'use strict';
+    
+    // 0. Client Hints 修改 (最优先执行，强制覆盖)
+    try {{
+        const clientHintsData = {json.dumps(client_hints)};
+        console.log('🔧 开始强制修改 Client Hints:', clientHintsData);
+        
+        if (typeof navigator !== 'undefined' && clientHintsData && Object.keys(clientHintsData).length > 0) {{
+            // 解析品牌信息
+            const brands = [];
+            if (clientHintsData['Sec-CH-UA']) {{
+                const brandString = clientHintsData['Sec-CH-UA'];
+                const brandMatches = brandString.match(/"([^"]+)";v="([^"]+)"/g);
+                if (brandMatches) {{
+                    for (const match of brandMatches) {{
+                        const [, brand, version] = match.match(/"([^"]+)";v="([^"]+)"/);
+                        brands.push({{ brand, version }});
+                    }}
+                }}
+            }}
+            
+            const isMobile = clientHintsData['Sec-CH-UA-Mobile'] === '?1';
+            const platform = clientHintsData['Sec-CH-UA-Platform'] ? clientHintsData['Sec-CH-UA-Platform'].replace(/"/g, '') : 'Windows';
+            
+            // 创建完全新的 userAgentData 对象
+            const newUserAgentData = Object.freeze({{
+                brands: Object.freeze(brands),
+                mobile: isMobile,
+                platform: platform,
+                
+                getHighEntropyValues: function(hints) {{
+                    const result = {{
+                        brands: this.brands,
+                        mobile: this.mobile,
+                        platform: this.platform
+                    }};
+                    
+                    if (hints.includes('architecture')) {{
+                        result.architecture = clientHintsData['Sec-CH-UA-Arch'] ? clientHintsData['Sec-CH-UA-Arch'].replace(/"/g, '') : 'x86';
+                    }}
+                    if (hints.includes('bitness')) {{
+                        result.bitness = clientHintsData['Sec-CH-UA-Bitness'] ? clientHintsData['Sec-CH-UA-Bitness'].replace(/"/g, '') : '64';
+                    }}
+                    if (hints.includes('model')) {{
+                        result.model = clientHintsData['Sec-CH-UA-Model'] ? clientHintsData['Sec-CH-UA-Model'].replace(/"/g, '') : '';
+                    }}
+                    if (hints.includes('platformVersion')) {{
+                        result.platformVersion = clientHintsData['Sec-CH-UA-Platform-Version'] ? clientHintsData['Sec-CH-UA-Platform-Version'].replace(/"/g, '') : '';
+                    }}
+                    if (hints.includes('uaFullVersion')) {{
+                        result.uaFullVersion = clientHintsData['Sec-CH-UA-Full-Version'] ? clientHintsData['Sec-CH-UA-Full-Version'].replace(/"/g, '') : '';
+                    }}
+                    
+                    return Promise.resolve(result);
+                }},
+                
+                toJSON: function() {{
+                    return {{
+                        brands: this.brands,
+                        mobile: this.mobile,
+                        platform: this.platform
+                    }};
+                }}
+            }});
+            
+            // 多种方式强制替换 navigator.userAgentData
+            try {{
+                // 方式1: 直接删除后重新定义
+                delete navigator.userAgentData;
+                navigator.userAgentData = newUserAgentData;
+                console.log('✅ 方式1成功: 直接赋值');
+            }} catch (e1) {{
+                try {{
+                    // 方式2: 使用 defineProperty 强制覆盖
+                    Object.defineProperty(navigator, 'userAgentData', {{
+                        value: newUserAgentData,
+                        writable: false,
+                        configurable: true,
+                        enumerable: true
+                    }});
+                    console.log('✅ 方式2成功: defineProperty');
+                }} catch (e2) {{
+                    try {{
+                        // 方式3: 修改原型链
+                        Object.defineProperty(Navigator.prototype, 'userAgentData', {{
+                            get: function() {{ return newUserAgentData; }},
+                            configurable: true,
+                            enumerable: true
+                        }});
+                        console.log('✅ 方式3成功: 原型链修改');
+                    }} catch (e3) {{
+                        console.error('❌ 所有 userAgentData 替换方式都失败:', e1, e2, e3);
+                    }}
+                }}
+            }}
+            
+            // 验证替换结果
+            console.log('🔍 验证 Client Hints 修改结果:');
+            console.log('  navigator.userAgentData:', navigator.userAgentData);
+            console.log('  brands:', navigator.userAgentData ? navigator.userAgentData.brands : 'N/A');
+            console.log('  platform:', navigator.userAgentData ? navigator.userAgentData.platform : 'N/A');
+            console.log('  mobile:', navigator.userAgentData ? navigator.userAgentData.mobile : 'N/A');
+            
+            // 额外的验证：尝试调用 getHighEntropyValues
+            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {{
+                navigator.userAgentData.getHighEntropyValues(['architecture', 'platformVersion']).then(data => {{
+                    console.log('✅ getHighEntropyValues 测试成功:', data);
+                }}).catch(err => {{
+                    console.warn('⚠️ getHighEntropyValues 测试失败:', err);
+                }});
+            }}
+        }} else {{
+            console.warn('⚠️ Client Hints 数据为空或navigator不可用');
+        }}
+    }} catch (e) {{
+        console.error('❌ Client Hints 修改过程失败:', e);
+    }}
     
     // 1. WebGL 指纹修改
     try {{
@@ -616,7 +902,100 @@ class BrowserFingerprint:
         console.warn('Fonts 指纹修改失败:', e);
     }}
     
-    // 7. 移除 Chrome 自动化特征
+    // 7. 拦截并修改请求头（Client Hints）- 强化版
+    try {{
+        const clientHintsData = {json.dumps(client_hints)};
+        console.log('🌐 开始设置 HTTP 请求头拦截:', clientHintsData);
+        
+        if (clientHintsData && Object.keys(clientHintsData).length > 0) {{
+            // 拦截 fetch 请求 - 强化版
+            if (typeof window !== 'undefined' && window.fetch) {{
+                const originalFetch = window.fetch;
+                
+                window.fetch = function(resource, options = {{}}) {{
+                    // 确保 headers 对象存在
+                    if (!options.headers) {{
+                        options.headers = {{}};
+                    }}
+                    
+                    // 如果 headers 是 Headers 对象，转换为普通对象
+                    if (options.headers instanceof Headers) {{
+                        const newHeaders = {{}};
+                        for (const [key, value] of options.headers.entries()) {{
+                            newHeaders[key] = value;
+                        }}
+                        options.headers = newHeaders;
+                    }}
+                    
+                    // 强制添加所有 Client Hints 头部
+                    for (const [key, value] of Object.entries(clientHintsData)) {{
+                        options.headers[key] = value;
+                    }}
+                    
+                    console.log('🔄 Fetch 请求已添加 Client Hints:', options.headers);
+                    
+                    return originalFetch.call(this, resource, options);
+                }};
+                
+                console.log('✅ Fetch 拦截已设置');
+            }}
+            
+            // 拦截 XMLHttpRequest - 强化版
+            if (typeof XMLHttpRequest !== 'undefined') {{
+                const originalOpen = XMLHttpRequest.prototype.open;
+                const originalSend = XMLHttpRequest.prototype.send;
+                const originalSetRequestHeader = XMLHttpRequest.prototype.setRequestHeader;
+                
+                XMLHttpRequest.prototype.open = function(method, url, async, user, password) {{
+                    this._clientHintsApplied = false;
+                    return originalOpen.call(this, method, url, async, user, password);
+                }};
+                
+                XMLHttpRequest.prototype.send = function(data) {{
+                    // 在发送前添加 Client Hints 头部
+                    if (!this._clientHintsApplied) {{
+                        for (const [key, value] of Object.entries(clientHintsData)) {{
+                            try {{
+                                originalSetRequestHeader.call(this, key, value);
+                            }} catch (e) {{
+                                console.warn(`无法设置头部 ${{key}}: ${{e.message}}`);
+                            }}
+                        }}
+                        this._clientHintsApplied = true;
+                        console.log('🔄 XMLHttpRequest 已添加 Client Hints');
+                    }}
+                    
+                    return originalSend.call(this, data);
+                }};
+                
+                XMLHttpRequest.prototype.setRequestHeader = function(name, value) {{
+                    // 如果是Client Hints相关头部，使用我们的值覆盖
+                    if (clientHintsData[name]) {{
+                        console.log(`🔄 覆盖请求头 ${{name}}: ${{clientHintsData[name]}}`);
+                        return originalSetRequestHeader.call(this, name, clientHintsData[name]);
+                    }}
+                    return originalSetRequestHeader.call(this, name, value);
+                }};
+                
+                console.log('✅ XMLHttpRequest 拦截已设置');
+            }}
+            
+            // 额外：拦截其他可能的请求方法
+            if (typeof navigator !== 'undefined' && navigator.sendBeacon) {{
+                const originalSendBeacon = navigator.sendBeacon;
+                navigator.sendBeacon = function(url, data) {{
+                    // 对于sendBeacon，我们无法直接修改头部，但可以记录
+                    console.log('🔄 SendBeacon 请求检测到:', url);
+                    return originalSendBeacon.call(this, url, data);
+                }};
+            }}
+        }}
+        
+    }} catch (e) {{
+        console.error('❌ 请求头 Client Hints 拦截设置失败:', e);
+    }}
+    
+    // 8. 移除 Chrome 自动化特征
     try {{
         delete navigator.__proto__.webdriver;
         
@@ -637,7 +1016,7 @@ class BrowserFingerprint:
         console.warn('移除自动化特征失败:', e);
     }}
     
-    console.log('✅ 浏览器指纹修改脚本已注入 (WebGL + Canvas + Navigator + Audio + Fonts)');
+    console.log('✅ 浏览器指纹修改脚本已注入 (WebGL + Canvas + Navigator + Audio + Fonts + Client Hints)');
 }})();
 """
         return script
@@ -757,6 +1136,32 @@ class BrowserFingerprint:
         console.log('  - Fonts 检测失败:', e.message);
     }
     
+    // 9. Client Hints 检测
+    console.log('\\n[Client Hints 检测]');
+    try {
+        if (navigator.userAgentData) {
+            console.log('  - navigator.userAgentData 可用: true');
+            console.log('  - Brands:', navigator.userAgentData.brands);
+            console.log('  - Mobile:', navigator.userAgentData.mobile);
+            console.log('  - Platform:', navigator.userAgentData.platform);
+            
+            // 异步获取高熵值
+            navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness', 'model', 'platformVersion', 'uaFullVersion'])
+                .then(data => {
+                    console.log('  - Architecture:', data.architecture);
+                    console.log('  - Bitness:', data.bitness);
+                    console.log('  - Model:', data.model);
+                    console.log('  - Platform Version:', data.platformVersion);
+                    console.log('  - UA Full Version:', data.uaFullVersion);
+                })
+                .catch(e => console.log('  - 获取高熵值失败:', e.message));
+        } else {
+            console.log('  - navigator.userAgentData 不可用（可能是较旧的浏览器）');
+        }
+    } catch (e) {
+        console.log('  - Client Hints 检测失败:', e.message);
+    }
+    
     console.log('\\n========== 验证完成 ==========\\n');
     
     // 返回结果对象
@@ -787,6 +1192,21 @@ class BrowserFingerprint:
                 } : null;
             } catch (e) {
                 return null;
+            }
+        })(),
+        clientHints: (function() {
+            try {
+                if (navigator.userAgentData) {
+                    return {
+                        brands: navigator.userAgentData.brands,
+                        mobile: navigator.userAgentData.mobile,
+                        platform: navigator.userAgentData.platform,
+                        available: true
+                    };
+                }
+                return { available: false };
+            } catch (e) {
+                return { available: false, error: e.message };
             }
         })()
     };

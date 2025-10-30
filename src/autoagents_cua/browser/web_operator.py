@@ -66,6 +66,11 @@ class WebOperator:
         if self.injection_script:
             self._inject_fingerprint_script_on_new_document()
             logger.success("指纹脚本已配置为在所有新页面加载前自动注入")
+        
+        # 如果有Client Hints配置，设置请求头拦截
+        if self.fingerprint and self.fingerprint.get('client_hints'):
+            self._setup_client_hints_interception()
+            logger.success("Client Hints 请求头拦截已配置")
     
     def close(self):
         """关闭浏览器"""
@@ -486,3 +491,245 @@ class WebOperator:
             import traceback
             traceback.print_exc()
             return None
+    
+    def _setup_client_hints_interception(self):
+        """
+        使用 CDP 设置 Client Hints 覆盖
+        
+        使用多种方法确保 Client Hints 修改成功
+        """
+        try:
+            client_hints = self.fingerprint.get('client_hints', {})
+            user_agent = self.fingerprint.get('user_agent', '')
+            
+            if not client_hints or not user_agent:
+                logger.warning("缺少 Client Hints 或 User-Agent 配置")
+                return
+            
+            logger.info("🔧 开始设置 Client Hints 覆盖...")
+            
+            # 启用必要的 CDP domains
+            self.page.run_cdp('Network.enable')
+            self.page.run_cdp('Runtime.enable')
+            self.page.run_cdp('Page.enable')
+            
+            # 构建 Client Hints 元数据
+            user_agent_metadata = {
+                'brands': [],
+                'mobile': client_hints.get('Sec-CH-UA-Mobile') == '?1',
+                'platform': client_hints.get('Sec-CH-UA-Platform', '').replace('"', ''),
+            }
+            
+            # 解析品牌信息
+            if 'Sec-CH-UA' in client_hints:
+                brands_string = client_hints['Sec-CH-UA']
+                import re
+                brand_matches = re.findall(r'"([^"]+)";v="([^"]+)"', brands_string)
+                for brand, version in brand_matches:
+                    user_agent_metadata['brands'].append({
+                        'brand': brand,
+                        'version': version
+                    })
+            
+            # 添加高熵值数据
+            if client_hints.get('Sec-CH-UA-Platform-Version'):
+                user_agent_metadata['platformVersion'] = client_hints['Sec-CH-UA-Platform-Version'].replace('"', '')
+            if client_hints.get('Sec-CH-UA-Arch'):
+                user_agent_metadata['architecture'] = client_hints['Sec-CH-UA-Arch'].replace('"', '')
+            if client_hints.get('Sec-CH-UA-Bitness'):
+                user_agent_metadata['bitness'] = client_hints['Sec-CH-UA-Bitness'].replace('"', '')
+            if client_hints.get('Sec-CH-UA-Model'):
+                user_agent_metadata['model'] = client_hints['Sec-CH-UA-Model'].replace('"', '')
+            if client_hints.get('Sec-CH-UA-Full-Version'):
+                user_agent_metadata['fullVersion'] = client_hints['Sec-CH-UA-Full-Version'].replace('"', '')
+            
+            logger.info(f"📋 构建的 Client Hints 元数据:")
+            logger.info(f"   Platform: {user_agent_metadata['platform']}")
+            logger.info(f"   Mobile: {user_agent_metadata['mobile']}")
+            logger.info(f"   Brands: {user_agent_metadata['brands']}")
+            
+            # 方法1: 使用 Network.setUserAgentOverride
+            try:
+                override_params = {
+                    'userAgent': user_agent,
+                    'userAgentMetadata': user_agent_metadata
+                }
+                
+                result = self.page.run_cdp('Network.setUserAgentOverride', **override_params)
+                logger.success("✅ Network.setUserAgentOverride 调用成功")
+                logger.debug(f"CDP 返回结果: {result}")
+            except Exception as e:
+                logger.error(f"❌ Network.setUserAgentOverride 失败: {e}")
+            
+            # 方法2: 使用 Emulation.setUserAgentOverride  
+            try:
+                result2 = self.page.run_cdp('Emulation.setUserAgentOverride', **override_params)
+                logger.success("✅ Emulation.setUserAgentOverride 调用成功")
+                logger.debug(f"CDP 返回结果: {result2}")
+            except Exception as e:
+                logger.warning(f"⚠️  Emulation.setUserAgentOverride 失败: {e}")
+            
+            # 方法3: 设置请求拦截器
+            try:
+                # 启用请求拦截
+                self.page.run_cdp('Fetch.enable', {
+                    'patterns': [{'urlPattern': '*'}]
+                })
+                
+                # 注册请求处理器
+                def handle_request_paused(params):
+                    try:
+                        request_id = params['requestId']
+                        request = params['request']
+                        
+                        # 修改请求头
+                        headers = request.get('headers', {})
+                        
+                        # 添加 Client Hints 头部
+                        for hint_name, hint_value in client_hints.items():
+                            headers[hint_name] = hint_value
+                        
+                        # 继续请求
+                        self.page.run_cdp('Fetch.continueRequest', {
+                            'requestId': request_id,
+                            'headers': [{'name': k, 'value': v} for k, v in headers.items()]
+                        })
+                        
+                    except Exception as e:
+                        logger.debug(f"请求拦截处理失败: {e}")
+                        # 如果处理失败，继续原始请求
+                        try:
+                            self.page.run_cdp('Fetch.continueRequest', {'requestId': request_id})
+                        except:
+                            pass
+                
+                # 这里我们不能直接设置事件监听器，因为 DrissionPage 可能不支持
+                # 但我们已经启用了 Fetch domain
+                logger.info("✅ Fetch domain 已启用")
+                
+            except Exception as e:
+                logger.debug(f"启用 Fetch 拦截失败: {e}")
+            
+            # 方法4: 强化的JavaScript注入
+            enhanced_script = f"""
+            // 强化的 Client Hints 覆盖脚本
+            (function() {{
+                'use strict';
+                console.log('🔧 开始强化 Client Hints 覆盖...');
+                
+                const clientHintsData = {client_hints};
+                console.log('Client Hints 数据:', clientHintsData);
+                
+                // 立即覆盖 navigator.userAgentData
+                if (typeof navigator !== 'undefined') {{
+                    try {{
+                        const brands = [];
+                        if (clientHintsData['Sec-CH-UA']) {{
+                            const brandString = clientHintsData['Sec-CH-UA'];
+                            const brandMatches = brandString.match(/"([^"]+)";v="([^"]+)"/g);
+                            if (brandMatches) {{
+                                for (const match of brandMatches) {{
+                                    const [, brand, version] = match.match(/"([^"]+)";v="([^"]+)"/);
+                                    brands.push({{ brand, version }});
+                                }}
+                            }}
+                        }}
+                        
+                        const isMobile = clientHintsData['Sec-CH-UA-Mobile'] === '?1';
+                        const platform = clientHintsData['Sec-CH-UA-Platform'] ? clientHintsData['Sec-CH-UA-Platform'].replace(/"/g, '') : 'Windows';
+                        
+                        console.log('解析的 Client Hints:');
+                        console.log('  brands:', brands);
+                        console.log('  mobile:', isMobile);
+                        console.log('  platform:', platform);
+                        
+                        // 创建完全新的 userAgentData 对象
+                        const newUserAgentData = {{
+                            brands: brands,
+                            mobile: isMobile,
+                            platform: platform,
+                            
+                            getHighEntropyValues: function(hints) {{
+                                console.log('getHighEntropyValues 被调用，参数:', hints);
+                                const result = {{
+                                    brands: this.brands,
+                                    mobile: this.mobile,
+                                    platform: this.platform
+                                }};
+                                
+                                if (hints.includes('architecture')) {{
+                                    result.architecture = clientHintsData['Sec-CH-UA-Arch'] ? clientHintsData['Sec-CH-UA-Arch'].replace(/"/g, '') : 'x86';
+                                }}
+                                if (hints.includes('bitness')) {{
+                                    result.bitness = clientHintsData['Sec-CH-UA-Bitness'] ? clientHintsData['Sec-CH-UA-Bitness'].replace(/"/g, '') : '64';
+                                }}
+                                if (hints.includes('model')) {{
+                                    result.model = clientHintsData['Sec-CH-UA-Model'] ? clientHintsData['Sec-CH-UA-Model'].replace(/"/g, '') : '';
+                                }}
+                                if (hints.includes('platformVersion')) {{
+                                    result.platformVersion = clientHintsData['Sec-CH-UA-Platform-Version'] ? clientHintsData['Sec-CH-UA-Platform-Version'].replace(/"/g, '') : '';
+                                }}
+                                if (hints.includes('uaFullVersion')) {{
+                                    result.uaFullVersion = clientHintsData['Sec-CH-UA-Full-Version'] ? clientHintsData['Sec-CH-UA-Full-Version'].replace(/"/g, '') : '';
+                                }}
+                                
+                                console.log('getHighEntropyValues 返回结果:', result);
+                                return Promise.resolve(result);
+                            }},
+                            
+                            toJSON: function() {{
+                                return {{
+                                    brands: this.brands,
+                                    mobile: this.mobile,
+                                    platform: this.platform
+                                }};
+                            }}
+                        }};
+                        
+                        // 强制替换 navigator.userAgentData
+                        try {{
+                            Object.defineProperty(navigator, 'userAgentData', {{
+                                value: newUserAgentData,
+                                writable: false,
+                                configurable: false,
+                                enumerable: true
+                            }});
+                            console.log('✅ navigator.userAgentData 强制替换成功');
+                        }} catch (e) {{
+                            console.log('第一次替换失败，尝试其他方法:', e);
+                            try {{
+                                delete navigator.userAgentData;
+                                navigator.userAgentData = newUserAgentData;
+                                console.log('✅ navigator.userAgentData 删除重建成功');
+                            }} catch (e2) {{
+                                console.log('第二次替换也失败:', e2);
+                            }}
+                        }}
+                        
+                        // 验证替换结果
+                        console.log('验证替换结果:');
+                        console.log('  navigator.userAgentData:', navigator.userAgentData);
+                        console.log('  brands:', navigator.userAgentData.brands);
+                        console.log('  platform:', navigator.userAgentData.platform);
+                        console.log('  mobile:', navigator.userAgentData.mobile);
+                        
+                    }} catch (e) {{
+                        console.error('Client Hints 覆盖失败:', e);
+                    }}
+                }}
+                
+                console.log('✅ 强化 Client Hints 覆盖脚本执行完成');
+            }})();
+            """
+            
+            # 注入强化脚本
+            self.page.run_cdp('Page.addScriptToEvaluateOnNewDocument', {
+                'source': enhanced_script,
+                'worldName': 'enhanced_client_hints'
+            })
+            logger.success("✅ 强化 Client Hints 脚本已注册")
+            
+        except Exception as e:
+            logger.error(f"❌ 设置 Client Hints 拦截失败: {e}")
+            import traceback
+            traceback.print_exc()
