@@ -19,15 +19,70 @@ def create_tool_with_context(func: Callable, operator: Any, extractor: Any, time
     为工具函数绑定上下文（operator, extractor, time_tracker）
     
     Args:
-        func: 原始工具函数
+        func: 原始工具函数（可以是 langchain tool 对象或普通函数）
         operator: WebOperator 实例
         extractor: PageExtractor 实例
         time_tracker_ref: TimeTracker 引用（可选）
     
     Returns:
-        绑定了上下文的工具函数
+        绑定了上下文的 langchain tool 对象
     """
-    return partial(func, operator=operator, extractor=extractor, time_tracker_ref=time_tracker_ref)
+    from langchain_core.tools import StructuredTool
+    
+    # 如果是 langchain tool 对象，获取底层函数和元数据
+    if isinstance(func, StructuredTool):
+        original_func = func.func
+        tool_name = func.name
+        tool_description = func.description
+        tool_args_schema = func.args_schema if hasattr(func, 'args_schema') else None
+    elif hasattr(func, 'func'):
+        # 可能是其他类型的 tool 对象
+        original_func = func.func
+        tool_name = getattr(func, 'name', func.__name__)
+        tool_description = getattr(func, 'description', func.__doc__ or '')
+        tool_args_schema = getattr(func, 'args_schema', None)
+    elif hasattr(func, '__wrapped__'):
+        # 装饰器包装的函数
+        original_func = func.__wrapped__
+        tool_name = func.__name__
+        tool_description = func.__doc__ or ''
+        tool_args_schema = None
+    else:
+        # 普通函数
+        original_func = func
+        tool_name = func.__name__
+        tool_description = func.__doc__ or ''
+        tool_args_schema = None
+    
+    # 确保是可调用的
+    if not callable(original_func):
+        raise TypeError(f"函数对象不可调用: {type(original_func)}")
+    
+    # 创建包装函数，绑定上下文参数
+    def wrapped_func(*args, **kwargs):
+        # 将上下文参数添加到 kwargs
+        kwargs['operator'] = operator
+        kwargs['extractor'] = extractor
+        kwargs['time_tracker_ref'] = time_tracker_ref
+        # 调用原始函数
+        return original_func(*args, **kwargs)
+    
+    # 保留原始函数的元数据
+    wrapped_func.__name__ = tool_name
+    wrapped_func.__doc__ = tool_description
+    
+    # 使用 @tool 装饰器创建新的 tool 对象
+    # 如果原始 tool 有 args_schema，需要保留它
+    if tool_args_schema:
+        new_tool = tool(wrapped_func, args_schema=tool_args_schema)
+    else:
+        new_tool = tool(wrapped_func)
+    
+    # 确保新 tool 的名称和描述与原始 tool 一致
+    new_tool.name = tool_name
+    new_tool.description = tool_description
+    
+    return new_tool
 
 
 def _start_timing(time_tracker_ref, category="tool_call"):
@@ -129,7 +184,7 @@ def extract_page_elements(operator=None, extractor=None, time_tracker_ref=None) 
     # 生成描述
     for tag, items in by_type.items():
         element_desc += f"【{tag.upper()}】 {len(items)} 个\n"
-        for item in items[:5]:  # 只显示前5个
+        for item in items:  
             text = item['text'][:30] if item['text'] else ''
             attrs_str = ''
             if 'id' in item['attrs']:
@@ -139,9 +194,7 @@ def extract_page_elements(operator=None, extractor=None, time_tracker_ref=None) 
             
             element_desc += f"  [{item['index']}] {text}{attrs_str}\n"
         
-        if len(items) > 5:
-            element_desc += f"  ... 还有 {len(items) - 5} 个\n"
-        element_desc += "\n"
+        
     
     return element_desc
 

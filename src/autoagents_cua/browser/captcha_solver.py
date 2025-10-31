@@ -26,9 +26,9 @@ from DrissionPage import ChromiumPage, ChromiumOptions
 
 class CaptchaAgent:
     def __init__(self, 
-                api_key: str = "sk-YzEnX4MC8gTeOQ1C97LCMiInyighBQI9bDPhNUyiK5X7v6gu", 
-                base_url: str = "https://api.tu-zi.com/v1",
-                model: str = "gemini-2.5-pro",
+                api_key: str , 
+                base_url: str ,
+                model: str ,
                 ):
         self.api_key = api_key
         self.base_url = base_url

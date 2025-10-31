@@ -9,8 +9,8 @@ from src.autoagents_cua.models import Stage
 
 # ============= AI 相关代码（已注释） =============
 import openai
-openai.api_key = "sk-zfCHwb5DjKxuks62DeD39e57F0Fb4bB2Bd00E0A0215480D9"
-openai.base_url = "https://api.gpt.ge/v1/"
+openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.base_url = os.getenv("OPENAI_BASE_URL")
 openai.default_headers = {"x-foo": "true"}
 
 # 使用 WebOperator 创建浏览器实例

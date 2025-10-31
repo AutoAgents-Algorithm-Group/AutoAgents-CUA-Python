@@ -18,9 +18,9 @@ def main():
 
     # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
-        base_url="https://api.tu-zi.com/v1",
-        model="gemini-2.5-pro"
+        api_key= os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_BASE_URL"),
+        model=os.getenv("OPENAI_MODEL")
     )
     
     # 创建 LoginAgent（直接传入配置）

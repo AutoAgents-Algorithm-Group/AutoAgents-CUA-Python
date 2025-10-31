@@ -6,6 +6,7 @@ from src.autoagents_cua.client import ChatClient
 from src.autoagents_cua.models import ClientConfig, ModelConfig
 from src.autoagents_cua.agent import BrowserAgent
 from src.autoagents_cua.browser import Browser
+from dotenv import load_dotenv
 
 
 def main():
@@ -27,8 +28,16 @@ def main():
     )
 
     agent = BrowserAgent(browser=browser, llm=llm)
-    result = agent.invoke("请帮我打开谷歌")
+    while True:
+        instruction = input("请输入指令: ")
+        if instruction == "exit":
+            break   
+        result = agent.invoke(instruction)
+        print(result)
+    agent.close()
         
 if __name__ == "__main__":
+    load_dotenv()
     main()
+    
 

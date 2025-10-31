@@ -1,5 +1,7 @@
 import os
 import sys
+from tkinter import N
+from tracemalloc import start
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from DrissionPage import WebPage
@@ -20,9 +22,9 @@ def test_captcha_agent_full_flow():
     
     # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
-        base_url="https://api.tu-zi.com/v1",
-        model="gemini-2.5-pro"
+        api_key= os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_BASE_URL"),
+        model=os.getenv("OPENAI_MODEL")
     )
     
     # 创建页面对象
@@ -82,9 +84,7 @@ def test_captcha_agent_with_login():
     
     # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
-        base_url="https://api.tu-zi.com/v1",
-        model="gemini-2.5-pro"
+        
     )
     
     # 创建 LoginAgent（直接传入配置）

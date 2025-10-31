@@ -1,9 +1,13 @@
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+# 将项目的 src 目录加入路径，便于以包形式导入
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+SRC_DIR = os.path.join(PROJECT_ROOT, 'src')
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
-from src.autoagents_cua.browser import WebOperator
-from src.autoagents_cua.utils import logger
+from autoagents_cua.browser import WebOperator
+from autoagents_cua.utils import logger
 
 
 def test_web_operator():
@@ -62,9 +66,9 @@ def test_web_operator_with_login_agent():
     
     # 创建 CaptchaAgent（直接传入配置）
     captcha_agent = CaptchaAgent(
-        api_key="sk-jsiE3Le9Dh8V7h1UJ202x15uPyIoK909FkaFX8HmAKC0h1ha",
-        base_url="https://api.tu-zi.com/v1",
-        model="gemini-2.5-pro"
+        api_key= os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_BASE_URL"),
+        model=os.getenv("OPENAI_MODEL")
     )
     
     # 创建 LoginAgent（直接传入配置，内部会自动创建 WebOperator）

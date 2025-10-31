@@ -14,7 +14,7 @@ class WebOperator:
     所有需要使用 DrissionPage 的类都应该通过 WebOperator 来操作浏览器。
     """
     
-    def __init__(self, headless=False, fingerprint_config: Optional[Union[str, Dict[str, Any]]] = None):
+    def __init__(self, headless=False, fingerprint_config: Optional[Union[str, Dict[str, Any]]] = None, user_data_dir: Optional[str] = None):
         """
         初始化网页操作器
         
