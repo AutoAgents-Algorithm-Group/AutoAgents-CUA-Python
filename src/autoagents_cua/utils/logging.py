@@ -34,33 +34,51 @@ class Logger:
         # 导出 logger 实例
         self.logger = _logger
     
+    def _format_category_filter(self, record):
+        """过滤器函数：为每条日志添加 formatted_category"""
+        # 优先使用 category，其次使用 stage，默认为 System
+        if "category" in record["extra"]:
+            category = record["extra"]["category"]
+        elif "stage" in record["extra"]:
+            # 将中文 stage 映射为英文
+            stage_map = {"系统级别": "System", "业务级别": "Business"}
+            category = stage_map.get(record["extra"]["stage"], "System")
+        else:
+            category = "System"
+        
+        # 截断或填充到 10 个字符
+        category = category[:10].ljust(10)
+        record["extra"]["formatted_category"] = category
+        return True  # 必须返回 True 才能继续处理
+    
     def _setup_handlers(self):
         """设置日志处理器"""
-        # 日志格式
+        # 日志格式（使用 formatted_category）
         log_format = (
             "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
             "<level>{level: <8}</level> | "
-            "<cyan>{extra[stage]}</cyan> | "
+            "<cyan>{extra[formatted_category]}</cyan> | "
             "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | "
             "<level>{message}</level>"
         )
         
-        # 简化的控制台格式
+        # 简化的控制台格式（使用 formatted_category）
         console_format = (
             "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-            "<level>{level: <7}</level> | "
-            "<cyan>{extra[stage]}</cyan> | "
+            "<level>{level: <8}</level> | "
+            "<cyan>{extra[formatted_category]}</cyan> | "
             "<level>{message}</level>"
         )
         
         # 添加控制台输出 (INFO 及以上级别)
         _logger.add(
-            sys.stdout,
+            sys.stderr,  # 使用 stderr 以便与标准输出分离
             format=console_format,
-            level="INFO",
+            level="DEBUG",
             colorize=True,
             backtrace=True,
-            diagnose=True
+            diagnose=True,
+            filter=self._format_category_filter  # 使用 filter 处理 category
         )
         
         # 添加日志文件 (DEBUG 及以上级别)
@@ -73,7 +91,8 @@ class Logger:
             retention="7 days",  # 保留 7 天
             encoding="utf-8",
             backtrace=True,
-            diagnose=True
+            diagnose=True,
+            filter=self._format_category_filter  # 使用 filter 处理 category
         )
     
     def get_logger(self, name: str = None):
