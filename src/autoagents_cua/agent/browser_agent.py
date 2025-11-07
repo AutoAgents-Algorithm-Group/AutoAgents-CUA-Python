@@ -1,13 +1,18 @@
+from langchain_openai import ChatOpenAI
 from ..browser import Browser
 from ..utils.logging import logger
 from ..tools import bind_tools_to_context, ALL_WEB_TOOLS
 from ..client import ChatClient
 
+
+from langchain.agents.middleware import TodoListMiddleware
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
 from typing import List, Callable, Optional
 import time
 from collections import defaultdict
+from langchain.messages import HumanMessage
+
 
 
 class TimeTracker:
@@ -117,6 +122,7 @@ class BrowserAgent:
             model=self.llm_client.llm,
             tools=self.bound_tools,
             checkpointer=self.checkpointer,
+            middleware=[TodoListMiddleware()],
         )
         self.graph = self.agent.get_graph()
         
@@ -169,6 +175,7 @@ class BrowserAgent:
             
             # 构建用户消息，包含截图信息
             user_message_content = instruction + screenshot_info
+            
             if screenshot_info:
                 logger.info(f"📷 当前对话包含截图: {self.recent_screenshot}")
             
